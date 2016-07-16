@@ -29,12 +29,12 @@ public  class HKListAdapter extends BaseQuickAdapter<HKItem> {
     }
 
     @Override
-    protected void convert(BaseViewHolder baseViewHolder, HKItem hkItem) {
+    protected void convert(final BaseViewHolder baseViewHolder, HKItem hkItem) {
         baseViewHolder.setText(R.id.hukai_item_title,hkItem.getTitle())
                 .setText(R.id.hukai_item_time,hkItem.getTime());
-        //((HtmlTextView)baseViewHolder.getView(R.id.hukai_item_preview)).
-        ((HtmlTextView)baseViewHolder.getView(R.id.hukai_item_preview)).setHtmlFromString(hkItem.getPreview(),
-               new HtmlTextView.LocalImageGetter());
+        //((HtmlTextView)baseViewHolder.getView(R.id.hukai_item_preview)).setHtmlFromString(hkItem.getPreview(), null);
+        HtmlTextView textView = baseViewHolder.getView(R.id.hukai_item_preview);
+        textView.setHtmlFromStringWithHtmlImageGetter(hkItem.getPreview(),new URLImageParser(textView));
     }
 
     private void loadData(){
