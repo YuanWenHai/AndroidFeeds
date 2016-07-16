@@ -9,7 +9,7 @@ import com.will.androidfeeds.util.NetworkHelper;
  */
 public class CsdnContentHelper {
     public void loadContent(String url, final Callback callback){
-        NetworkHelper.getInstance().loadWebSource(url, new NetworkHelper.LoadWebSourceCallback() {
+        NetworkHelper.getInstance().loadWebSource(url, true,true, new NetworkHelper.LoadWebSourceCallback() {
             @Override
             public void onSuccess(String source) {
                 callback.onSuccess(JsoupHelper.getCsdnContentFromSource(source));

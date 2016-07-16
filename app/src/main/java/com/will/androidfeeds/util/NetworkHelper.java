@@ -40,11 +40,12 @@ public class NetworkHelper {
      * 加载指定网址源码
      * @param url url
      * @param fromCache 是否优先从缓存中加载，如果为否，则在获取网络信息后更新缓存。
+     * @param write2Cache 是否写入disk缓存
      * @param callback callback
      */
-    public void loadWebSource(final String url, boolean fromCache,final LoadWebSourceCallback callback){
+    public void loadWebSource(final String url, boolean fromCache, final boolean write2Cache, final LoadWebSourceCallback callback){
         String source;
-        if(!fromCache && (source = mCache.getSourceFromCache(url)) != null){
+        if(fromCache && (source = mCache.getSourceFromCache(url)) != null){
             callback.onSuccess(source);
             return;
         }
@@ -63,7 +64,9 @@ public class NetworkHelper {
             @Override
             public void onResponse(Response response) throws IOException {
                 final String body = response.body().string();
-                mCache.write2DiskCache(url,body);
+                if(write2Cache){
+                    mCache.write2DiskCache(url,body);
+                }
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {

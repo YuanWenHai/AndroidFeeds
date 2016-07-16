@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array  name="csdn_author_array">
+        <item>"鸿洋_"</item>
+        <item>郭霖</item>
+        <item>AigeStudio</item>
+        <item>张兴业</item>
+    </string-array>
+    <string-array name="csdn_blog_url">
+        <item>http://blog.csdn.net/lmj623565791/article/list/</item>
+        <item>http://blog.csdn.net/sinyu890807/article/list/</item>
+        <item>http://blog.csdn.net/aigestudio/article/list/</item>
+        <item>http://blog.csdn.net/xyz_lmn/article/list/</item>
+    </string-array>
+    <integer-array name="colors">
+        <item>@color/colorPrimaryDark</item>
+        <item>@color/colorAccent</item>
+        <item>@android:color/holo_green_light</item>
+        <item>@color/dark_orange</item>
+    </integer-array>
+</resources>

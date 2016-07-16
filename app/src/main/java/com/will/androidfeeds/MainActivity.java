@@ -1,34 +1,37 @@
 package com.will.androidfeeds;
 
 import android.os.Bundle;
-import android.util.Log;
+import android.support.design.widget.NavigationView;
+import android.view.MenuItem;
 
 import com.will.androidfeeds.base.BaseActivity;
-import com.will.androidfeeds.bean.CsdnItem;
-import com.will.androidfeeds.common.ErrorCode;
-import com.will.androidfeeds.util.JsoupHelper;
-import com.will.androidfeeds.util.NetworkHelper;
-
-import java.util.List;
+import com.will.androidfeeds.common.Const;
+import com.will.androidfeeds.util.FragmentSwitcher;
 
 public class MainActivity extends BaseActivity {
-
+    private FragmentSwitcher switcher;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        NetworkHelper.getInstance().loadWebSource("http://blog.csdn.net/lmj623565791/article/list/1", new NetworkHelper.LoadWebSourceCallback() {
+        initViews();
+        switcher = new FragmentSwitcher(getFragmentManager());
+        switcher.switchFragment(Const.FRAGMENT_HUKAI);
+    }
+    @SuppressWarnings("all")
+    private void initViews(){
+        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onSuccess(String source) {
-                List<CsdnItem> list = JsoupHelper.getCsdnListItemFromSource(source);
-                Log.e("link:",list.get(0).getLink());
-                Log.e("title:",list.get(0).getTitle());
-                Log.e("time:",list.get(0).getTime());
-                Log.e("count:",JsoupHelper.getCsdnListItemCount(source));
-            }
-
-            @Override
-            public void onFailure(ErrorCode code) {
-
+            public boolean onNavigationItemSelected(MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.navigation_csdn:
+                        switcher.switchFragment(Const.FRAGMENT_CSDN);
+                        break;
+                    case R.id.navigation_hukai:
+                        switcher.switchFragment(Const.FRAGMENT_HUKAI);
+                        break;
+                }
+                return true;
             }
         });
     }

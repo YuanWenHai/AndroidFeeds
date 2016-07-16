@@ -1,18 +1,17 @@
 package com.will.androidfeeds.base;
 
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
+
+import com.will.androidfeeds.common.Tools;
 
 /**
  * Created by Will on 2016/7/6.
  */
 public class BaseActivity extends AppCompatActivity {
-    protected Toast mToast;
     public void showToast(String message){
-        if(mToast == null){
-            mToast = Toast.makeText(this,"", Toast.LENGTH_SHORT);
-        }
-        mToast.setText(message);
-        mToast.show();
+        Tools.showToast(message);
+    }
+    public int getContentViewHeight(){
+        return findViewById(android.R.id.content).getHeight();
     }
 }
