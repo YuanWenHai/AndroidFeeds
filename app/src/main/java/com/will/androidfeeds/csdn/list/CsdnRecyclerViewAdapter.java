@@ -147,7 +147,7 @@ public class CsdnRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
             @Override
             public void onSuccess(String source) {
                 List<CsdnItem> list = JsoupHelper.getCsdnListItemFromSource(source);
-                totalCount = Integer.parseInt(JsoupHelper.getCsdnListItemCount(source));
+                totalCount = JsoupHelper.getCsdnListItemCount(source);
                 data.addAll(list);
                 //Log.e(data.get(0).getTitle(),data.size()+"");
                 pageIndex++;

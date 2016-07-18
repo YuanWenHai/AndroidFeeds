@@ -1,9 +1,11 @@
 package com.will.androidfeeds.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by Will on 2016/7/15.
  */
-public class HKItem {
+public class HKItem implements Serializable{
     private String title,link,time,preview;
     public String getTitle(){
         return title;

@@ -47,6 +47,15 @@ public final class MWebView extends ObservableWebView {
         init();
     }
 
+    public void show(){
+
+            if(Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+                loadUrl(previewText);
+            } else {
+                evaluateJavascript(previewText, null);
+            }
+        }
+
     @TargetApi(11)
     @SuppressLint("SetJavaScriptEnabled")
     private void init(){
@@ -104,6 +113,7 @@ public final class MWebView extends ObservableWebView {
     /** set show the Markdown text. **/
     public void setMDText(String text){
         text2Mark(text);
+        show();
     }
 
     private void text2Mark(String mdText){

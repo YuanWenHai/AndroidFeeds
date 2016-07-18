@@ -2,7 +2,6 @@ package com.will.androidfeeds.util;
 
 import android.content.Context;
 import android.os.Handler;
-import android.util.Log;
 
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.OkHttpClient;
@@ -11,27 +10,28 @@ import com.squareup.okhttp.Response;
 import com.will.androidfeeds.base.MyApplication;
 import com.will.androidfeeds.common.ErrorCode;
 
-import java.io.File;
 import java.io.IOException;
 
 /**
  * Created by Will on 2016/7/6.
  */
 public class NetworkHelper {
-    private static NetworkHelper mInstance;
+    private volatile static NetworkHelper mInstance;
     private static Context mContext = MyApplication.getGlobalContext();
     private OkHttpClient mClient;
     private Handler mHandler;
     private DiskCache mCache = DiskCache.getInstance();
     private NetworkHelper(){
-        File cacheDir = new File(mContext.getCacheDir(),"network_cache");
-        Log.e("cacheDir",cacheDir.getPath());
         mClient = new OkHttpClient();
         mHandler = new Handler(mContext.getMainLooper());
     }
-    public static synchronized NetworkHelper getInstance(){
+    public static  NetworkHelper getInstance(){
         if(mInstance == null){
-            mInstance = new NetworkHelper();
+            synchronized(NetworkHelper.class){
+                if(mInstance == null){
+                    mInstance = new NetworkHelper();
+                }
+            }
         }
         return mInstance;
     }

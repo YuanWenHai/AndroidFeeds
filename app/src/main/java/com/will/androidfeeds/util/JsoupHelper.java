@@ -45,10 +45,10 @@ public class JsoupHelper {
         }
         return list;
     }
-    public static String getCsdnListItemCount(String source){
+    public static int getCsdnListItemCount(String source){
         Document doc = Jsoup.parse(source);
         String temp = doc.select("div#papelist").text();
-        return temp.substring(0,temp.indexOf("条"));
+        return Integer.parseInt(temp.substring(0,temp.indexOf("条")));
     }
     public static List<HKItem> getHKItemFromSource(String source){
         Document doc = Jsoup.parse(source);
@@ -70,5 +70,15 @@ public class JsoupHelper {
     public static boolean hasMoreHKItem(String source){
         Document doc = Jsoup.parse(source);
         return !doc.select("div.pagination").select("a.prev").isEmpty();
+    }
+    public static String getHKContentFromSource(String source){
+        Document doc = Jsoup.parse(source);
+        Elements content = doc.select("div.entry-content");
+        Elements imgs = content.select("img");
+        for (Element img :imgs){
+            String url = img.attr("src");
+            img.attr("src","http:hukai.me"+url);
+        }
+        return content.html();
     }
 }

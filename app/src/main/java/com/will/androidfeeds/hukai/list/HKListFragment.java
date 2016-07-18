@@ -32,7 +32,7 @@ public class HKListFragment extends BaseFragment implements SwipeRefreshLayout.O
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.hukai_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new HKListAdapter(R.layout.hukai_list_item,R.layout.list_loading_view);
+        mAdapter = new HKListAdapter(R.layout.hukai_list_item,R.layout.list_loading_view,R.layout.list_loading_failed_view);
         recyclerView.setAdapter(mAdapter);
         return view;
     }

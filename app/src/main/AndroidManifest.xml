@@ -20,6 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".csdn.content.CsdnContentActivity"/>
+        <activity android:name=".hukai.content.HKContentActivity"/>
     </application>
 
 </manifest>

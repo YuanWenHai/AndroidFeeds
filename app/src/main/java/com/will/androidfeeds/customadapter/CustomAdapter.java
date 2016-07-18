@@ -12,21 +12,32 @@ import java.util.List;
 
 /**
  * Created by Will on 2016/7/17.
+ * <p>一个简单的RecyclerViewAdapter</p>
+ * <p>到末尾自动加载更多，加载更多失败后，即{@link #update(boolean)}返回false后,将判定为加载失败
+ * 此时将在末尾展示loadingFailedView</p>
+ * <p>loadingFailedView的点击默认实现为重新加载，可以通过{@link #setOnReloadListener(OnReloadClickListener)}替换</p>
+ * <p>提供了refreshData方法刷新内容</p>
  */
 public abstract class CustomAdapter <T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int TYPE_ITEM = 0;
-    private static final int TYPE_FOOTER = 1;
+    private static final int TYPE_LOADING = 1;
+    private static final int TYPE_LOADING_FAILED = 2;
     private ArrayList<T> data;
     private int pageIndex = 1;
     private boolean isLoading;
-    private int layoutRes;
-    private OnItemClickListener listener;
+    private OnItemClickListener itemClickListener;
+    private OnReloadClickListener reloadClickListener;
     private int loadingViewRes;
-    private RecyclerView recyclerView;
-    public CustomAdapter(int layoutRes,int loadingViewRes){
+    private int layoutRes;
+    private int loadingFailedViewRes;
+
+    private boolean loadingSuccess = true;
+    private RecyclerView mRecyclerView;
+    public CustomAdapter(int layoutRes,int loadingViewRes,int loadingFailedViewRes){
         data = new ArrayList<>();
         this.layoutRes = layoutRes;
         this.loadingViewRes = loadingViewRes;
+        this.loadingFailedViewRes = loadingFailedViewRes;
     }
 
     /**
@@ -36,9 +47,10 @@ public abstract class CustomAdapter <T> extends RecyclerView.Adapter<RecyclerVie
     public abstract boolean hasMoreData();
 
     /**
-     * <p>加载内容，当下拉至末尾时会调用此方法
-     * @param page 加载页数，初始值为1</p>
-     * <p>因为是加载内容，故多为异步加载，在异步任务完成后，务必调用{@link #update(boolean)} 提交更新，无论成功与否.</p>
+     * <p>加载内容，当下拉至末尾时会调用此方法</p>
+     * 因为是加载内容，故多为异步加载，在异步任务完成后，务必调用{@link #update(boolean)} 提交更新，无论成功与否.
+     * <p>@建议：如果任务失败/完成过快会造成loadingView显示时间过短，影响视觉效果，可以用postDelayed控制update的延时来控制</p>
+     * @param page 加载页数，初始值为1
      *
      */
     public abstract void loadData(int page);
@@ -53,7 +65,7 @@ public abstract class CustomAdapter <T> extends RecyclerView.Adapter<RecyclerVie
     @Override
     public int getItemViewType(int position){
         if(hasMoreData() && position == data.size() ){
-            return TYPE_FOOTER;
+            return loadingSuccess ? TYPE_LOADING : TYPE_LOADING_FAILED;
         }
         return TYPE_ITEM;
     }
@@ -70,7 +82,7 @@ public abstract class CustomAdapter <T> extends RecyclerView.Adapter<RecyclerVie
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position){
         if(holder instanceof BaseViewHolder){
             convert((BaseViewHolder) holder,data.get(position));
-        }else{
+        }else if(holder instanceof CustomAdapter.LoadingViewHolder) {
             if(!isLoading){
                 isLoading = true;
                 loadData(pageIndex);
@@ -78,15 +90,15 @@ public abstract class CustomAdapter <T> extends RecyclerView.Adapter<RecyclerVie
         }
     }
 
-    public void setLoadingViewRes(int loadingViewRes){
-        this.loadingViewRes = loadingViewRes;
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+        if(mRecyclerView == null){
+            this.mRecyclerView = recyclerView;
+        }
     }
 
-
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int type){
-        if(recyclerView == null){
-            recyclerView = (RecyclerView) parent;
-        }
         View v;
         if(type == TYPE_ITEM){
             v = LayoutInflater.from(parent.getContext()).inflate(layoutRes,parent,false);
@@ -94,22 +106,40 @@ public abstract class CustomAdapter <T> extends RecyclerView.Adapter<RecyclerVie
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(listener != null){
-                        listener.onItemClicked(data.get(holder.getAdapterPosition()));
+                    if(itemClickListener != null){
+                        itemClickListener.onItemClicked(data.get(holder.getAdapterPosition()));
                     }
                 }
             });
             return holder;
-        }else{
+        }else if(type == TYPE_LOADING) {
             v = LayoutInflater.from(parent.getContext()).inflate(loadingViewRes,parent,false);
-            return new FooterViewHolder(v);
+            return new LoadingViewHolder(v);
+        } else {
+            v = LayoutInflater.from(parent.getContext()).inflate(loadingFailedViewRes,parent,false);
+            return new LoadingFailedViewHolder(v);
         }
 
     }
-    public class FooterViewHolder extends RecyclerView.ViewHolder{
+    public class LoadingViewHolder extends RecyclerView.ViewHolder{
 
-        public FooterViewHolder(View v){
+        public LoadingViewHolder(View v){
             super(v);
+        }
+    }
+    public class LoadingFailedViewHolder extends RecyclerView.ViewHolder{
+        public LoadingFailedViewHolder(View v){
+            super(v);
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(reloadClickListener == null){
+                        reLoadData();
+                    }else{
+                        reloadClickListener.onReload();
+                    }
+                }
+            });
         }
     }
 
@@ -131,31 +161,53 @@ public abstract class CustomAdapter <T> extends RecyclerView.Adapter<RecyclerVie
      */
     public void update(boolean which){
         isLoading = false;
+        loadingSuccess = which;
         if(which){
             pageIndex++;
         }
-        recyclerView.post(new Runnable() {
+        mRecyclerView.post(new Runnable() {
             @Override
             public void run() {
                 notifyDataSetChanged();
+                if(!loadingSuccess){
+                    mRecyclerView.smoothScrollToPosition(getItemCount()-1);
+                }
             }
         });
+    }
+    public RecyclerView getRecyclerView(){
+        return mRecyclerView;
     }
     public List<T> getData(){
         return data;
     }
 
     /**
-     * 清除已有数据重新获得，刷新显示
-     * @param data data
+     * 是否正在加载，配合swipeRefreshLayout时调用此方法，避免加载冲突
+     * @return isLoading
      */
-    public void refreshData(List<T> data){
+    public boolean isLoading(){
+        return isLoading;
+    }
+    /**
+     * 清除已有数据重新获得，刷新显示
+     * @param newData data
+     */
+    public void refreshData(List<T> newData){
         data.clear();
         pageIndex = 1;
-        update(true,data);
+        update(true,newData);
+    }
+    private void reLoadData(){
+        loadingSuccess = true;
+        notifyDataSetChanged();
+
     }
     public void setOnItemClickListener(OnItemClickListener listener){
-        this.listener = listener;
+        this.itemClickListener = listener;
+    }
+    public void setOnReloadListener(OnReloadClickListener listener){
+        this.reloadClickListener = listener;
     }
     public interface OnItemClickListener{
         void onItemClicked(Object item);
@@ -163,6 +215,9 @@ public abstract class CustomAdapter <T> extends RecyclerView.Adapter<RecyclerVie
     public interface OnRefreshCallback{
         void onSuccess();
         void onFailure(ErrorCode code);
+    }
+    public interface OnReloadClickListener{
+        void onReload();
     }
 
 }

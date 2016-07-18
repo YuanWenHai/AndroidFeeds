@@ -13,10 +13,14 @@ import java.io.IOException;
 public class DiskCache {
     private static final int DISK_CACHE_SIZE = 10 * 1024 *1024;//10Mib
     private  DiskLruCache mCache;
-    private static DiskCache mInstance;
-    public static synchronized DiskCache getInstance(){
+    private volatile static DiskCache mInstance;
+    public static DiskCache getInstance(){
         if(mInstance == null){
-            mInstance = new DiskCache();
+            synchronized(DiskCache.class){
+                if(mInstance == null){
+                    mInstance = new DiskCache();
+                }
+            }
         }
         return mInstance;
     }
