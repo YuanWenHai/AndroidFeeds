@@ -111,7 +111,7 @@ public class CsdnRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
             v = LayoutInflater.from(parent.getContext()).inflate(R.layout.csdn_list_item,parent,false);
             return new CsdnViewHolder(v);
         }else{
-            v = LayoutInflater.from(parent.getContext()).inflate(R.layout.csdn_list_footer,parent,false);
+            v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_loading_view,parent,false);
             return new FooterViewHolder(v);
         }
 

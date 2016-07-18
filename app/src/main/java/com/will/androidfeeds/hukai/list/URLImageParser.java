@@ -32,16 +32,13 @@ public class URLImageParser implements Html.ImageGetter {
 
     public Drawable getDrawable(String source) {
         source = HUKAI_HOST + source;
-        URLDrawable urlDrawable = new URLDrawable();
-        container.setTag(source);
+        URLDrawable mDrawable= new URLDrawable();
         // get the actual source
-        ImageGetterAsyncTask asyncTask = new ImageGetterAsyncTask( urlDrawable);
-
+        ImageGetterAsyncTask asyncTask = new ImageGetterAsyncTask( mDrawable);
         asyncTask.execute(source);
-
         // return reference to URLDrawable where I will change with actual image from
         // the src tag
-        return urlDrawable;
+        return mDrawable;
     }
 
     public class ImageGetterAsyncTask extends AsyncTask<String, Void, Drawable> {

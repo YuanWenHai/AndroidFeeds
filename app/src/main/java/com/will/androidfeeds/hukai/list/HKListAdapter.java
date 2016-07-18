@@ -1,59 +1,86 @@
 package com.will.androidfeeds.hukai.list;
 
+import android.text.Html;
 import android.util.Log;
+import android.widget.TextView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
 import com.will.androidfeeds.R;
 import com.will.androidfeeds.bean.HKItem;
 import com.will.androidfeeds.common.ErrorCode;
+import com.will.androidfeeds.customadapter.BaseViewHolder;
+import com.will.androidfeeds.customadapter.CustomAdapter;
 import com.will.androidfeeds.util.JsoupHelper;
 import com.will.androidfeeds.util.NetworkHelper;
 
-import org.sufficientlysecure.htmltextview.HtmlTextView;
-
-import java.util.List;
-
 /**
- * Created by Will on 2016/7/16.
+ * Created by Will on 2016/7/17.
  */
-public  class HKListAdapter extends BaseQuickAdapter<HKItem> {
+public  class HKListAdapter extends CustomAdapter<HKItem> {
     private static final String HUKAI_HOST = "http://hukai.me";
-    private List<HKItem> data;
-    private boolean hasMoreItem;
+    private static final String HUKAI_LINK = "/blog/page/";
     private NetworkHelper networkHelper = NetworkHelper.getInstance();
-    public HKListAdapter(List<HKItem> data){
-        super(R.layout.hukai_list_item,data);
-        this.data  = data;
-        loadData();
-    }
+    private boolean hasMoreData = true;
+    public HKListAdapter(int layoutRes,int loadingViewRes){
+        super(layoutRes,loadingViewRes);
 
-    @Override
-    protected void convert(final BaseViewHolder baseViewHolder, HKItem hkItem) {
-        baseViewHolder.setText(R.id.hukai_item_title,hkItem.getTitle())
-                .setText(R.id.hukai_item_time,hkItem.getTime());
-        //((HtmlTextView)baseViewHolder.getView(R.id.hukai_item_preview)).setHtmlFromString(hkItem.getPreview(), null);
-        HtmlTextView textView = baseViewHolder.getView(R.id.hukai_item_preview);
-        textView.setHtmlFromStringWithHtmlImageGetter(hkItem.getPreview(),new URLImageParser(textView));
-    }
+        setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClicked(Object item) {
+                HKItem hkItem = (HKItem) item;
+                Log.e("Item title",hkItem.getTitle());
+            }
+        });
 
-    private void loadData(){
-        networkHelper.loadWebSource(HUKAI_HOST, true, true, new NetworkHelper.LoadWebSourceCallback() {
+    }
+    public void onRefresh(final OnRefreshCallback callback){
+        networkHelper.loadWebSource(HUKAI_HOST, false, true, new NetworkHelper.LoadWebSourceCallback() {
             @Override
             public void onSuccess(String source) {
-                data.addAll(JsoupHelper.getHKItemFromSource(source));
-                hasMoreItem = JsoupHelper.hasMoreHKItem(source);
-                notifyDataSetChanged();
-                Log.e("time",data.get(0).getTime());
-                Log.e("title",data.get(0).getTitle());
-                Log.e("link",data.get(0).getLink());
-                Log.e("size :",data.size()+"");
+                hasMoreData = JsoupHelper.hasMoreHKItem(source);
+                refreshData(JsoupHelper.getHKItemFromSource(source));
+                callback.onSuccess();
+
+            }
+            @Override
+            public void onFailure(ErrorCode code) {
+                callback.onFailure(code);
+            }
+        });
+    }
+
+
+
+    @Override
+    public void loadData(int page) {
+        String url = HUKAI_HOST;
+        boolean useCache = true;
+        if(page != 1){
+            url = HUKAI_HOST  + HUKAI_LINK + page;
+            useCache = false;
+        }
+        networkHelper.loadWebSource(url, useCache, useCache, new NetworkHelper.LoadWebSourceCallback() {
+            @Override
+            public void onSuccess(String source) {
+                hasMoreData = JsoupHelper.hasMoreHKItem(source);
+                update(true,JsoupHelper.getHKItemFromSource(source));
             }
 
             @Override
             public void onFailure(ErrorCode code) {
-
+                update(false);
             }
         });
+    }
+    @Override
+    public boolean hasMoreData() {
+        return hasMoreData;
+    }
+
+    @Override
+    public void convert(BaseViewHolder holder, HKItem item) {
+        holder.setText(R.id.hukai_item_title,item.getTitle())
+                .setText(R.id.hukai_item_time,item.getTime());
+        TextView textView = (TextView) holder.getView(R.id.hukai_item_preview);
+        textView.setText(Html.fromHtml(item.getPreview()));
     }
 }

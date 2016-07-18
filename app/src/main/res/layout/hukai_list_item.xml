@@ -22,7 +22,7 @@
             android:textColor="@color/black"
             android:paddingStart="5dp"
             tools:text="Android性能优化典范 - 第5季"/>
-        <org.sufficientlysecure.htmltextview.HtmlTextView
+        <TextView
             android:id="@+id/hukai_item_preview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

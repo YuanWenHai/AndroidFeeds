@@ -58,6 +58,7 @@ public class JsoupHelper {
         articles = articles.select("article");
         for( Element article :articles){
             item = new HKItem();
+            article.select("img").remove();
             item.setTitle(article.select("h1.entry-title").text());
             item.setLink(article.select("h1.entry-title").select("a[href]").attr("href"));
             item.setTime(article.select("time[datetime]").text());
