@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import com.will.androidfeeds.R;
 import com.will.androidfeeds.base.BaseFragment;
 import com.will.androidfeeds.common.ErrorCode;
-import com.will.androidfeeds.customadapter.CustomAdapter;
+import com.will.androidfeeds.customAdapter.CustomAdapter;
 
 /**
  * Created by Will on 2016/7/12.

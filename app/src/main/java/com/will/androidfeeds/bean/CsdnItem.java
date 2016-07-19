@@ -2,6 +2,7 @@ package com.will.androidfeeds.bean;
 
 /**
  * Created by Will on 2016/7/7.
+ * csdn
  */
 public class CsdnItem {
     private String title,link,time;

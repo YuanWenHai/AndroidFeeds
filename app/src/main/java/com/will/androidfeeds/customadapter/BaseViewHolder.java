@@ -1,4 +1,4 @@
-package com.will.androidfeeds.customadapter;
+package com.will.androidfeeds.customAdapter;
 
 /**
  * Created by Will on 2016/7/17.

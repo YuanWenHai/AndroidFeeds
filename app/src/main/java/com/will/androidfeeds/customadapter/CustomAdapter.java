@@ -1,4 +1,4 @@
-package com.will.androidfeeds.customadapter;
+package com.will.androidfeeds.customAdapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

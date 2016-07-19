@@ -3,7 +3,8 @@ package com.will.androidfeeds.bean;
 import java.io.Serializable;
 
 /**
- * Created by Will on 2016/7/15.
+ * Created by Will on 2016/7/15.'
+ * hukai
  */
 public class HKItem implements Serializable{
     private String title,link,time,preview;

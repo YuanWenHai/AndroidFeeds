@@ -6,6 +6,7 @@ import android.view.MenuItem;
 
 import com.will.androidfeeds.base.BaseActivity;
 import com.will.androidfeeds.common.Const;
+import com.will.androidfeeds.publicAccount.list.PAListFragment;
 import com.will.androidfeeds.util.FragmentSwitcher;
 
 public class MainActivity extends BaseActivity {
@@ -15,7 +16,8 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         initViews();
         switcher = new FragmentSwitcher(getFragmentManager());
-        switcher.switchFragment(Const.FRAGMENT_HUKAI);
+        //switcher.switchFragment(Const.FRAGMENT_HUKAI);
+        getFragmentManager().beginTransaction().add(R.id.fragment_container,new PAListFragment()).commit();
     }
     @SuppressWarnings("all")
     private void initViews(){

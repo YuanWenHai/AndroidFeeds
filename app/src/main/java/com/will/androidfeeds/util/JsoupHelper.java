@@ -2,6 +2,7 @@ package com.will.androidfeeds.util;
 
 import com.will.androidfeeds.bean.CsdnItem;
 import com.will.androidfeeds.bean.HKItem;
+import com.will.androidfeeds.bean.PAItem;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -80,5 +81,23 @@ public class JsoupHelper {
             img.attr("src","http:hukai.me"+url);
         }
         return content.html();
+    }
+    public static List<PAItem> getPAItemFromSource(String source){
+        List<PAItem> list = new ArrayList<>();
+        PAItem item;
+        Document doc = Jsoup.parse(source);
+        Elements items = doc.select("div.pagedlist_item");
+        for(Element element :items){
+            item = new PAItem();
+            item.setLink(element.select("a.question_link").attr("href"));
+            item.setTime(element.select("span.timestamp").text());
+            item.setTitle(element.select("a.question_link").text());
+            list.add(item);
+        }
+        return list;
+    }
+    public static String getPAContnentFromSource(String source){
+        Document doc = Jsoup.parse(source);
+        return doc.select("div.rich_media_area_primary").html();
     }
 }

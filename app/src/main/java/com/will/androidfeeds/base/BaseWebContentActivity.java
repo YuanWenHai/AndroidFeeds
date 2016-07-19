@@ -16,7 +16,7 @@ import com.will.androidfeeds.view.MWebView;
 /**
  * Created by Will on 2016/7/18.
  */
-public abstract class BaseWebContentActivity extends BaseActivity implements ObservableScrollViewCallbacks {
+public class BaseWebContentActivity extends BaseActivity implements ObservableScrollViewCallbacks {
     private MWebView markedView;
     private Toolbar toolbar;
 

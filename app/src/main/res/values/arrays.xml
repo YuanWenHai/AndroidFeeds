@@ -18,4 +18,39 @@
         <item>@android:color/holo_green_light</item>
         <item>@color/dark_orange</item>
     </integer-array>
+
+
+
+    <string-array name="public_account">
+        <item>郭霖</item>
+        <item>鸿洋</item>
+        <item>Android开发者</item>
+        <item>AndroidDeveloper</item>
+        <item>Android技术分享</item>
+        <item>Android程序员</item>
+        <item>Android每日干货</item>
+        <item>安卓开发</item>
+    </string-array>
+    <string-array name="public_account_links">
+        <item>http://chuansong.me/account/guolin_blog?start=</item>
+        <item>http://chuansong.me/account/hongyangAndroid?start=</item>
+        <item>http://chuansong.me/account/apkbus?start=</item>
+        <item>http://chuansong.me/account/googdev?start=</item>
+        <item>http://chuansong.me/account/gh_1322d5f620b9?start=</item>
+        <item>http://chuansong.me/account/androidtrending?start=</item>
+        <item>http://chuansong.me/account/ardays?start=</item>
+        <item>http://chuansong.me/account/anzhuoCoder?start=</item>
+    </string-array>
+    <integer-array name="public_account_images">
+        <item>@drawable/guolin_blog</item>
+        <item>@drawable/hongyangandroid</item>
+        <item>@drawable/apkbus</item>
+        <item>@drawable/googdev</item>
+        <item>@drawable/gh_1322d5f620b9</item>
+        <item>@drawable/androidtrending</item>
+        <item>@drawable/ardays</item>
+        <item>@drawable/anzhuocoder</item>
+    </integer-array>
+
+
 </resources>

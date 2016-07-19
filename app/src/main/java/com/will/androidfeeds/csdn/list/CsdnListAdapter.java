@@ -8,8 +8,8 @@ import com.will.androidfeeds.R;
 import com.will.androidfeeds.bean.CsdnItem;
 import com.will.androidfeeds.common.ErrorCode;
 import com.will.androidfeeds.csdn.content.CsdnContentActivity;
-import com.will.androidfeeds.customadapter.BaseViewHolder;
-import com.will.androidfeeds.customadapter.CustomAdapter;
+import com.will.androidfeeds.customAdapter.BaseViewHolder;
+import com.will.androidfeeds.customAdapter.CustomAdapter;
 import com.will.androidfeeds.util.JsoupHelper;
 import com.will.androidfeeds.util.NetworkHelper;
 

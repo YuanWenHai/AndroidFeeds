@@ -21,6 +21,10 @@
         </activity>
         <activity android:name=".csdn.content.CsdnContentActivity"/>
         <activity android:name=".hukai.content.HKContentActivity"/>
+        <activity android:name=".publicAccount.list.PAContentList"
+            android:theme="@style/PublicAccountTheme"/>
+        <activity android:name=".publicAccount.content.PAContentActivity"
+            android:theme="@style/PublicAccountTheme"/>
     </application>
 
 </manifest>
