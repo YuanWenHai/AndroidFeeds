@@ -2,11 +2,13 @@ package com.will.androidfeeds;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.view.Gravity;
 import android.view.MenuItem;
 
 import com.will.androidfeeds.base.BaseActivity;
 import com.will.androidfeeds.common.Const;
-import com.will.androidfeeds.publicAccount.list.PAListFragment;
+import com.will.androidfeeds.droidyue.list.DroidYueListFragment;
 import com.will.androidfeeds.util.FragmentSwitcher;
 
 public class MainActivity extends BaseActivity {
@@ -16,11 +18,12 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         initViews();
         switcher = new FragmentSwitcher(getFragmentManager());
-        //switcher.switchFragment(Const.FRAGMENT_HUKAI);
-        getFragmentManager().beginTransaction().add(R.id.fragment_container,new PAListFragment()).commit();
+        //switcher.switchFragment(Const.FRAGMENT_PUBLIC_ACCOUNT);
+        getFragmentManager().beginTransaction().add(R.id.fragment_container,new DroidYueListFragment()).commit();
     }
     @SuppressWarnings("all")
     private void initViews(){
+        final DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -32,6 +35,12 @@ public class MainActivity extends BaseActivity {
                     case R.id.navigation_hukai:
                         switcher.switchFragment(Const.FRAGMENT_HUKAI);
                         break;
+                    case R.id.navigation_public_account:
+                        switcher.switchFragment(Const.FRAGMENT_PUBLIC_ACCOUNT);
+                        break;
+                }
+                if(drawerLayout.isDrawerOpen(Gravity.LEFT)){
+                    drawerLayout.closeDrawers();
                 }
                 return true;
             }

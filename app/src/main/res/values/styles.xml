@@ -8,8 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
     <style name="CustomTheme" parent="AppTheme"/>
-    <style name="PublicAccountTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="PublicAccountTheme" parent="CustomTheme">
         <item name="colorPrimary">@color/android_green</item>
+    </style>
+    <style name="DroidYueTheme" parent="CustomTheme">
+        <item name="colorPrimary">@color/black</item>
     </style>
 
 

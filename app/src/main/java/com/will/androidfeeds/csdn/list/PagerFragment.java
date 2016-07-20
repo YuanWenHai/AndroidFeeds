@@ -11,13 +11,13 @@ import android.view.ViewGroup;
 import com.will.androidfeeds.R;
 import com.will.androidfeeds.base.BaseFragment;
 import com.will.androidfeeds.common.ErrorCode;
-import com.will.androidfeeds.customAdapter.CustomAdapter;
+import com.will.androidfeeds.customAdapter.CustomRecyclerAdapter;
 
 /**
  * Created by Will on 2016/7/12.
  */
 public class PagerFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener{
-    private CsdnListAdapter mAdapter;
+    private CsdnListRecyclerAdapter mAdapter;
     private SwipeRefreshLayout refreshLayout;
     private RecyclerView recyclerView;
     public static PagerFragment getInstance(String url){
@@ -34,7 +34,7 @@ public class PagerFragment extends BaseFragment implements SwipeRefreshLayout.On
         refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.csdn_list_refresh_layout);
         refreshLayout.setOnRefreshListener(this);
         recyclerView = (RecyclerView) view.findViewById(R.id.csdn_list_recycler_view);
-        mAdapter = new CsdnListAdapter(url);
+        mAdapter = new CsdnListRecyclerAdapter(url);
 
         recyclerView.setAdapter(mAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -48,7 +48,7 @@ public class PagerFragment extends BaseFragment implements SwipeRefreshLayout.On
             refreshLayout.setRefreshing(false);
             return;
         }
-        mAdapter.onRefresh(new CustomAdapter.OnRefreshCallback() {
+        mAdapter.onRefresh(new CustomRecyclerAdapter.OnRefreshCallback() {
             @Override
             public void onSuccess() {
                 refreshLayout.setRefreshing(false);

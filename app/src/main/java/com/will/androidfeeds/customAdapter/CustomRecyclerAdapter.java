@@ -18,7 +18,7 @@ import java.util.List;
  * <p>loadingFailedView的点击默认实现为重新加载，可以通过{@link #setOnReloadListener(OnReloadClickListener)}替换</p>
  * <p>提供了refreshData方法刷新内容</p>
  */
-public abstract class CustomAdapter <T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public abstract class CustomRecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int TYPE_ITEM = 0;
     private static final int TYPE_LOADING = 1;
     private static final int TYPE_LOADING_FAILED = 2;
@@ -31,9 +31,9 @@ public abstract class CustomAdapter <T> extends RecyclerView.Adapter<RecyclerVie
     private int layoutRes;
     private int loadingFailedViewRes;
 
-    private boolean loadingSuccess = true;
+    private boolean loadingSuccessful = true;
     private RecyclerView mRecyclerView;
-    public CustomAdapter(int layoutRes,int loadingViewRes,int loadingFailedViewRes){
+    public CustomRecyclerAdapter(int layoutRes, int loadingViewRes, int loadingFailedViewRes){
         data = new ArrayList<>();
         this.layoutRes = layoutRes;
         this.loadingViewRes = loadingViewRes;
@@ -56,7 +56,7 @@ public abstract class CustomAdapter <T> extends RecyclerView.Adapter<RecyclerVie
     public abstract void loadData(int page);
 
 
-    public abstract void convert(BaseViewHolder holder,T item );
+    public abstract void convert(BaseRecyclerViewHolder holder, T item );
 
 
 
@@ -65,24 +65,21 @@ public abstract class CustomAdapter <T> extends RecyclerView.Adapter<RecyclerVie
     @Override
     public int getItemViewType(int position){
         if(hasMoreData() && position == data.size() ){
-            return loadingSuccess ? TYPE_LOADING : TYPE_LOADING_FAILED;
+            return loadingSuccessful ? TYPE_LOADING : TYPE_LOADING_FAILED;
         }
         return TYPE_ITEM;
     }
 
     @Override
     public int getItemCount(){
-        if(hasMoreData()){
-            return data.size()+1;
-        }
-        return data.size();
+        return hasMoreData() ? data.size()+1 : data.size();
     }
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position){
-        if(holder instanceof BaseViewHolder){
-            convert((BaseViewHolder) holder,data.get(position));
-        }else if(holder instanceof CustomAdapter.LoadingViewHolder) {
+        if(holder instanceof BaseRecyclerViewHolder){
+            convert((BaseRecyclerViewHolder) holder,data.get(position));
+        }else if(holder instanceof CustomRecyclerAdapter.LoadingViewHolder) {
             if(!isLoading){
                 isLoading = true;
                 loadData(pageIndex);
@@ -102,7 +99,7 @@ public abstract class CustomAdapter <T> extends RecyclerView.Adapter<RecyclerVie
         View v;
         if(type == TYPE_ITEM){
             v = LayoutInflater.from(parent.getContext()).inflate(layoutRes,parent,false);
-            final BaseViewHolder holder = new BaseViewHolder(v);
+            final BaseRecyclerViewHolder holder = new BaseRecyclerViewHolder(v);
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -161,7 +158,7 @@ public abstract class CustomAdapter <T> extends RecyclerView.Adapter<RecyclerVie
      */
     public void update(boolean which){
         isLoading = false;
-        loadingSuccess = which;
+        loadingSuccessful = which;
         if(which){
             pageIndex++;
         }
@@ -169,7 +166,7 @@ public abstract class CustomAdapter <T> extends RecyclerView.Adapter<RecyclerVie
             @Override
             public void run() {
                 notifyDataSetChanged();
-                if(!loadingSuccess){
+                if(!loadingSuccessful){
                     mRecyclerView.smoothScrollToPosition(getItemCount()-1);
                 }
             }
@@ -199,7 +196,7 @@ public abstract class CustomAdapter <T> extends RecyclerView.Adapter<RecyclerVie
         update(true,newData);
     }
     private void reLoadData(){
-        loadingSuccess = true;
+        loadingSuccessful = true;
         notifyDataSetChanged();
 
     }
@@ -219,5 +216,4 @@ public abstract class CustomAdapter <T> extends RecyclerView.Adapter<RecyclerVie
     public interface OnReloadClickListener{
         void onReload();
     }
-
 }

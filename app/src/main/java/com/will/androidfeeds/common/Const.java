@@ -6,4 +6,6 @@ package com.will.androidfeeds.common;
 public class Const {
     public static final int FRAGMENT_CSDN = 0;
     public static final int FRAGMENT_HUKAI = 1;
+    public static final int FRAGMENT_PUBLIC_ACCOUNT = 2;
+
 }

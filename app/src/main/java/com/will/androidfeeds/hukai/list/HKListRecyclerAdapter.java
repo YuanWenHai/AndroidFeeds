@@ -8,8 +8,8 @@ import android.widget.TextView;
 import com.will.androidfeeds.R;
 import com.will.androidfeeds.bean.HKItem;
 import com.will.androidfeeds.common.ErrorCode;
-import com.will.androidfeeds.customAdapter.BaseViewHolder;
-import com.will.androidfeeds.customAdapter.CustomAdapter;
+import com.will.androidfeeds.customAdapter.BaseRecyclerViewHolder;
+import com.will.androidfeeds.customAdapter.CustomRecyclerAdapter;
 import com.will.androidfeeds.hukai.content.HKContentActivity;
 import com.will.androidfeeds.util.JsoupHelper;
 import com.will.androidfeeds.util.NetworkHelper;
@@ -17,16 +17,16 @@ import com.will.androidfeeds.util.NetworkHelper;
 /**
  * Created by Will on 2016/7/17.
  */
-public  class HKListAdapter extends CustomAdapter<HKItem> {
+public  class HKListRecyclerAdapter extends CustomRecyclerAdapter<HKItem> {
     private static final String HUKAI_HOST = "http://hukai.me";
     private static final String HUKAI_LINK = "/blog/page/";
     private NetworkHelper networkHelper = NetworkHelper.getInstance();
     private Context mContext;
     private boolean hasMoreData = true;
-    public HKListAdapter(){
+    public HKListRecyclerAdapter(){
         this(R.layout.hukai_list_item,R.layout.list_loading_view,R.layout.list_loading_failed_view);
     }
-    public HKListAdapter(int layoutRes,int loadingViewRes,int loadFailedViewRes){
+    public HKListRecyclerAdapter(int layoutRes, int loadingViewRes, int loadFailedViewRes){
         super(layoutRes,loadingViewRes,loadFailedViewRes);
         setOnItemClickListener(new OnItemClickListener() {
             @Override
@@ -91,7 +91,7 @@ public  class HKListAdapter extends CustomAdapter<HKItem> {
     }
 
     @Override
-    public void convert(BaseViewHolder holder, HKItem item) {
+    public void convert(BaseRecyclerViewHolder holder, HKItem item) {
         holder.setText(R.id.hukai_item_title,item.getTitle())
                 .setText(R.id.hukai_item_time,item.getTime());
         TextView textView = (TextView) holder.getView(R.id.hukai_item_preview);

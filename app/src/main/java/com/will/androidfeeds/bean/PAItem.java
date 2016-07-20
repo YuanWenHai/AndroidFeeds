@@ -2,7 +2,7 @@ package com.will.androidfeeds.bean;
 
 /**
  * Created by Will on 2016/7/19.
- * public account
+ * public account/公众号,Item
  */
 public class PAItem {
     private String title,time,link;

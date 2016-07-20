@@ -10,14 +10,14 @@ import android.view.View;
 import com.will.androidfeeds.R;
 import com.will.androidfeeds.base.BaseActivity;
 import com.will.androidfeeds.common.ErrorCode;
-import com.will.androidfeeds.customAdapter.CustomAdapter;
+import com.will.androidfeeds.customAdapter.CustomRecyclerAdapter;
 
 /**
  * Created by Will on 2016/7/19.
  */
 public class PAContentList extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener{
     private SwipeRefreshLayout refreshLayout;
-    private PAContentListAdapter adapter;
+    private PAContentListRecyclerAdapter adapter;
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,13 +41,13 @@ public class PAContentList extends BaseActivity implements SwipeRefreshLayout.On
 
 
         String url = getIntent().getStringExtra("url");
-        adapter = new PAContentListAdapter(url);
+        adapter = new PAContentListRecyclerAdapter(url);
         recyclerView.setAdapter(adapter);
     }
 
     @Override
     public void onRefresh() {
-        adapter.onRefresh(new CustomAdapter.OnRefreshCallback() {
+        adapter.onRefresh(new CustomRecyclerAdapter.OnRefreshCallback() {
             @Override
             public void onSuccess() {
                 refreshLayout.setRefreshing(false);

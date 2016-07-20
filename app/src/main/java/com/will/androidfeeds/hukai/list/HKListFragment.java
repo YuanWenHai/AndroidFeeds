@@ -13,14 +13,14 @@ import android.view.ViewGroup;
 import com.will.androidfeeds.R;
 import com.will.androidfeeds.base.BaseFragment;
 import com.will.androidfeeds.common.ErrorCode;
-import com.will.androidfeeds.customAdapter.CustomAdapter;
+import com.will.androidfeeds.customAdapter.CustomRecyclerAdapter;
 
 /**
  * Created by Will on 2016/7/16.
  */
 public class HKListFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener{
     private SwipeRefreshLayout refreshLayout;
-    private HKListAdapter mAdapter;
+    private HKListRecyclerAdapter mAdapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment_hukai_list,container,false);
@@ -32,14 +32,14 @@ public class HKListFragment extends BaseFragment implements SwipeRefreshLayout.O
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.hukai_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new HKListAdapter(R.layout.hukai_list_item,R.layout.list_loading_view,R.layout.list_loading_failed_view);
+        mAdapter = new HKListRecyclerAdapter(R.layout.hukai_list_item,R.layout.list_loading_view,R.layout.list_loading_failed_view);
         recyclerView.setAdapter(mAdapter);
         return view;
     }
 
     @Override
     public void onRefresh() {
-        mAdapter.onRefresh(new CustomAdapter.OnRefreshCallback() {
+        mAdapter.onRefresh(new CustomRecyclerAdapter.OnRefreshCallback() {
             @Override
             public void onSuccess() {
                 refreshLayout.setRefreshing(false);

@@ -1,6 +1,7 @@
 package com.will.androidfeeds.util;
 
 import com.will.androidfeeds.bean.CsdnItem;
+import com.will.androidfeeds.bean.DroidYueItem;
 import com.will.androidfeeds.bean.HKItem;
 import com.will.androidfeeds.bean.PAItem;
 
@@ -96,8 +97,31 @@ public class JsoupHelper {
         }
         return list;
     }
-    public static String getPAContnentFromSource(String source){
+    public static String getPAContentFromSource(String source){
         Document doc = Jsoup.parse(source);
         return doc.select("div.rich_media_area_primary").html();
+    }
+
+    /**
+     * 从网页中提取技术小黑屋条目，需要提到的是，该网页默认返回9条item，所以如果item数不足9，可认为已到末页。
+     * @param source 网页源代码
+     * @return 条目list
+     */
+    public static List<DroidYueItem> getDroidYueItemFromSource(String source){
+        String host = "http://droidyue.com";
+        List<DroidYueItem> list = new ArrayList<>();
+        DroidYueItem item;
+        Document doc = Jsoup.parse(source);
+        Elements articles = doc.select("div.blog-index").select("article");
+        for(Element article :articles){
+            item = new DroidYueItem();
+            article.select("img").remove();
+            item.setTitle(article.select("h1.entry-title").text());
+            item.setLink(host + article.select("h1.entry-title").select("a[href]").attr("href"));
+            item.setTime(article.select("time[datetime]").text());
+            item.setPreview(article.select("div.entry-content").html());
+            list.add(item);
+        }
+        return list;
     }
 }

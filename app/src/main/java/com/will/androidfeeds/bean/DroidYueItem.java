@@ -3,10 +3,10 @@ package com.will.androidfeeds.bean;
 import java.io.Serializable;
 
 /**
- * Created by Will on 2016/7/15.'
- * hukai/胡凯,Item
+ * Created by Will on 2016/7/20.
+ * 技术小黑屋,Item
  */
-public class HKItem implements Serializable{
+public class DroidYueItem implements Serializable{
     private String title,link,time,preview;
     public String getTitle(){
         return title;
@@ -32,5 +32,4 @@ public class HKItem implements Serializable{
     public void setPreview(String preview){
         this.preview = preview;
     }
-
 }

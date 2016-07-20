@@ -3,5 +3,7 @@
     <string name="change_orientation">改变方向</string>
     <string name="csdn">CSDN</string>
     <string name="hukai">胡凯</string>
+    <string name="public_account">公众号</string>
+    <string name="droid_yue">技术小黑屋</string>
     <string name="loading_failed">加载失败，点击重试</string>
 </resources>

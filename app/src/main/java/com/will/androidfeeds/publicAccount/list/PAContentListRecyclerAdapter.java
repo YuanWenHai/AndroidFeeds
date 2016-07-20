@@ -6,8 +6,8 @@ import android.content.Intent;
 import com.will.androidfeeds.R;
 import com.will.androidfeeds.bean.PAItem;
 import com.will.androidfeeds.common.ErrorCode;
-import com.will.androidfeeds.customAdapter.BaseViewHolder;
-import com.will.androidfeeds.customAdapter.CustomAdapter;
+import com.will.androidfeeds.customAdapter.BaseRecyclerViewHolder;
+import com.will.androidfeeds.customAdapter.CustomRecyclerAdapter;
 import com.will.androidfeeds.publicAccount.content.PAContentActivity;
 import com.will.androidfeeds.util.JsoupHelper;
 import com.will.androidfeeds.util.NetworkHelper;
@@ -17,11 +17,11 @@ import java.util.List;
 /**
  * Created by Will on 2016/7/19.
  */
-public class PAContentListAdapter extends CustomAdapter<PAItem> {
+public class PAContentListRecyclerAdapter extends CustomRecyclerAdapter<PAItem> {
     private String host;
     private NetworkHelper networkHelper = NetworkHelper.getInstance();
     private boolean hasMoreItem = true;
-    public PAContentListAdapter(String url){
+    public PAContentListRecyclerAdapter(String url){
         super(R.layout.csdn_list_item,R.layout.list_loading_view,R.layout.list_loading_failed_view);
         host = url;
         setOnItemClickListener(new OnItemClickListener() {
@@ -96,7 +96,7 @@ public class PAContentListAdapter extends CustomAdapter<PAItem> {
     }
 
     @Override
-    public void convert(BaseViewHolder holder, PAItem item) {
+    public void convert(BaseRecyclerViewHolder holder, PAItem item) {
         holder.setText(R.id.csdn_list_item_text,item.getTitle())
                 .setText(R.id.csdn_list_item_time,item.getTime());
     }

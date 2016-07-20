@@ -8,8 +8,8 @@ import com.will.androidfeeds.R;
 import com.will.androidfeeds.bean.CsdnItem;
 import com.will.androidfeeds.common.ErrorCode;
 import com.will.androidfeeds.csdn.content.CsdnContentActivity;
-import com.will.androidfeeds.customAdapter.BaseViewHolder;
-import com.will.androidfeeds.customAdapter.CustomAdapter;
+import com.will.androidfeeds.customAdapter.BaseRecyclerViewHolder;
+import com.will.androidfeeds.customAdapter.CustomRecyclerAdapter;
 import com.will.androidfeeds.util.JsoupHelper;
 import com.will.androidfeeds.util.NetworkHelper;
 
@@ -18,14 +18,14 @@ import java.util.List;
 /**
  * Created by Will on 2016/7/18.
  */
-public class CsdnListAdapter extends CustomAdapter<CsdnItem> {
+public class CsdnListRecyclerAdapter extends CustomRecyclerAdapter<CsdnItem> {
     private Context mContext;
     private String host;
     private int totalCount = -1;
 
     private NetworkHelper networkHelper = NetworkHelper.getInstance();
 
-    public CsdnListAdapter(String url){
+    public CsdnListRecyclerAdapter(String url){
         super(R.layout.csdn_list_item,R.layout.list_loading_view,R.layout.list_loading_failed_view);
         host = url;
         setOnItemClickListener(new OnItemClickListener() {
@@ -95,7 +95,7 @@ public class CsdnListAdapter extends CustomAdapter<CsdnItem> {
     }
 
     @Override
-    public void convert(BaseViewHolder holder, CsdnItem item) {
+    public void convert(BaseRecyclerViewHolder holder, CsdnItem item) {
         holder.setText(R.id.csdn_list_item_text,item.getTitle()).
                 setText(R.id.csdn_list_item_time,item.getTime());
     }

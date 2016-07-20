@@ -27,7 +27,7 @@ public class PAContentActivity extends BaseWebContentActivity {
         NetworkHelper.getInstance().loadWebSource(HOST+url, true, true, new NetworkHelper.LoadWebSourceCallback() {
             @Override
             public void onSuccess(String source) {
-                webView.setMDText(JsoupHelper.getPAContnentFromSource(source));
+                webView.setMDText(JsoupHelper.getPAContentFromSource(source));
             }
 
             @Override
