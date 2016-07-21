@@ -1,13 +1,15 @@
 package com.will.androidfeeds.droidyue.list;
 
+import android.content.Context;
+import android.content.Intent;
 import android.text.Html;
-import android.util.Log;
 
 import com.will.androidfeeds.R;
 import com.will.androidfeeds.bean.DroidYueItem;
 import com.will.androidfeeds.common.ErrorCode;
 import com.will.androidfeeds.customAdapter.BaseRecyclerViewHolder;
 import com.will.androidfeeds.customAdapter.CustomRecyclerAdapter;
+import com.will.androidfeeds.droidyue.content.DroidYueContentActivity;
 import com.will.androidfeeds.util.JsoupHelper;
 import com.will.androidfeeds.util.NetworkHelper;
 
@@ -24,8 +26,33 @@ public class DroidYueAdapter extends CustomRecyclerAdapter<DroidYueItem> {
 
     public DroidYueAdapter(){
         super(R.layout.hukai_list_item,R.layout.list_loading_view,R.layout.list_loading_failed_view);
+        setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClicked(Object item) {
+                DroidYueItem droidYueItem = (DroidYueItem) item;
+                Context mContext = getRecyclerView().getContext();
+                Intent intent = new Intent(mContext, DroidYueContentActivity.class);
+                intent.putExtra("url",droidYueItem.getLink());
+                mContext.startActivity(intent);
+            }
+        });
     }
+    public void onRefresh(final OnRefreshCallback callback){
+        networkHelper.loadWebSource(HOST, false, true, new NetworkHelper.LoadWebSourceCallback() {
+            @Override
+            public void onSuccess(String source) {
+                List<DroidYueItem> list = JsoupHelper.getDroidYueItemFromSource(source);
+                hasMoreItem = list.size() == 9;
+                refreshData(list);
+                callback.onSuccess();
+            }
 
+            @Override
+            public void onFailure(ErrorCode code) {
+                callback.onFailure(code);
+            }
+        });
+    }
     @Override
     public void convert(BaseRecyclerViewHolder holder, DroidYueItem item) {
         holder.setText(R.id.hukai_item_time,item.getTime())
@@ -42,7 +69,6 @@ public class DroidYueAdapter extends CustomRecyclerAdapter<DroidYueItem> {
         }else{
             url = HOST + SURFFIX + page;
         }
-        Log.e("url",url);
         networkHelper.loadWebSource(url, cachePolicy, cachePolicy, new NetworkHelper.LoadWebSourceCallback() {
             @Override
             public void onSuccess(String source) {

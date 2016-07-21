@@ -13,4 +13,11 @@
         android:id="@+id/navigation_public_account"
         android:title="@string/public_account"
         app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/navigation_droid_yue"
+        android:title="@string/droid_yue"
+        app:showAsAction="ifRoom"/>
+    <item android:id="@+id/navigation_styling_android"
+        android:title="@string/styling_android"
+        app:showAsAction="ifRoom"/>
 </menu>

@@ -4,6 +4,7 @@ import com.will.androidfeeds.bean.CsdnItem;
 import com.will.androidfeeds.bean.DroidYueItem;
 import com.will.androidfeeds.bean.HKItem;
 import com.will.androidfeeds.bean.PAItem;
+import com.will.androidfeeds.bean.StylingAndroidItem;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -123,5 +124,45 @@ public class JsoupHelper {
             list.add(item);
         }
         return list;
+    }
+    public static String getDroidYueContentFromSource(String source){
+        Document doc = Jsoup.parse(source);
+        Elements content = doc.select("div.entry-content");
+        Elements imgs = content.select("img");
+        /*for (Element img :imgs){
+            String url = img.attr("src");
+            img.attr("src","http://droidyue.com"+url);
+        }*/
+        return content.html();
+    }
+
+    /**
+     * 默认每页返回十条.
+     * @param source
+     * @return
+     */
+    public static List<StylingAndroidItem> getStylingAndroidItemFromSource(String source){
+        List<StylingAndroidItem> list = new ArrayList<>();
+        StylingAndroidItem item;
+        Document doc  = Jsoup.parse(source);
+        Elements articles = doc.select("div#primary").select("article");
+        for(Element element :articles){
+            item = new StylingAndroidItem();
+            item.setTitle(element.select("h1.entry-title").text());
+            item.setLink(element.select("h1.entry-title").select("a").attr("href"));
+            Elements preview = element.select("div.entry-content").select("p");
+            preview.select("a").remove();
+            item.setPreview(preview.html());
+            item.setTime(element.select("time.entry-date").text());
+            list.add(item);
+        }
+        return list;
+    }
+    public static String getStylingAndroidContentFromSource(String source){
+        Document doc = Jsoup.parse(source);
+        Elements article = doc.select("div.entry-content");
+        article.select("div").remove();
+        article.select("p[prefix]").remove();
+        return article.html();
     }
 }

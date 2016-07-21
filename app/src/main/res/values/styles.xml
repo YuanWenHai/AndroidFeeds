@@ -7,13 +7,31 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-    <style name="CustomTheme" parent="AppTheme"/>
-    <style name="PublicAccountTheme" parent="CustomTheme">
-        <item name="colorPrimary">@color/android_green</item>
+    <style name="CustomTheme" parent="AppTheme">
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textColorSecondary">@android:color/white</item>
     </style>
-    <style name="DroidYueTheme" parent="CustomTheme">
-        <item name="colorPrimary">@color/black</item>
+    <style name="PublicAccountTheme" parent="CustomTheme">
+        <item name="colorPrimary">@color/wechat_green</item>
     </style>
 
+
+    <style name="DroidYueTheme" parent="CustomTheme">
+        <item name="colorPrimary">@color/black</item>
+
+    </style>
+    <style name="DroidYueCollapsedTextAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:textColor"> @color/white</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+    <style name="DroidYueExpandedTextAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:textColor"> @color/white</item>
+        <item name="android:textSize">25sp</item>
+    </style>
+
+
+    <style name="StylingAndroidTheme" parent="CustomTheme">
+        <item name="colorPrimary">@color/styling_android_color</item>
+    </style>
 
 </resources>

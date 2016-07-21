@@ -7,5 +7,9 @@
     <color name="dark_black">#111111</color>
     <color name="black">#333333</color>
     <color name="grey">#555555</color>
-    <color name="android_green">#78AB34</color>
+    <color name="wechat_green">#78AB34</color>
+    <color name="white">#eeeeee</color>
+    <color name="styling_android_color">#607D8B</color>
+    <color name="styling_android_100">#CFD8DC</color>
+    <color name="styling_android_50">#ECEFF1</color>
 </resources>

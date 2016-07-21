@@ -10,7 +10,7 @@
         android:layout_height="180dp"
         android:scaleType="fitXY"
         android:src="@drawable/wechat_logo"
-        android:background="@color/android_green"
+        android:background="@color/wechat_green"
         android:padding="10dp"/>
 
     <com.github.ksoichiro.android.observablescrollview.ObservableGridView
@@ -24,7 +24,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/android_green"
+        android:background="@color/wechat_green"
         android:minHeight="?attr/actionBarSize"
         app:popupTheme="@style/Theme.AppCompat.Light.DarkActionBar" />
 </FrameLayout>

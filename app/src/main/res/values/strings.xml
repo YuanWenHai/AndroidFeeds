@@ -6,4 +6,14 @@
     <string name="public_account">公众号</string>
     <string name="droid_yue">技术小黑屋</string>
     <string name="loading_failed">加载失败，点击重试</string>
+    <string name="styling_android">Styling Android</string>
+    <string name="styling_android_info">A technical guide to improving the UI and UX of Android apps.</string>
+    <string name="styling_android_about">
+I am Mark Allison, a software developer with over 30 years’ experience, and over 4 years’ Android development experience. I run Styling Android Limited, an Android software development consultancy.\n
+\n
+I decided to write this blog because, while there is plenty of information regarding Android development in general, there is comparatively less information on styling and, in particular, theming Android apps. While much can be learned by browsing the Android source code, this can be a fairly difficult process, and often it is not easy to find precisely what you’re looking for.\n
+\n
+It is assumed that the reader is familiar with Android development in general.\n
+\n
+The views expressed within this blog are mine and do not represent those of my employer.\n</string>
 </resources>

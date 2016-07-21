@@ -8,7 +8,7 @@ import android.view.MenuItem;
 
 import com.will.androidfeeds.base.BaseActivity;
 import com.will.androidfeeds.common.Const;
-import com.will.androidfeeds.droidyue.list.DroidYueListFragment;
+import com.will.androidfeeds.stylingAndroid.list.StylingAndroidListFragment;
 import com.will.androidfeeds.util.FragmentSwitcher;
 
 public class MainActivity extends BaseActivity {
@@ -19,7 +19,7 @@ public class MainActivity extends BaseActivity {
         initViews();
         switcher = new FragmentSwitcher(getFragmentManager());
         //switcher.switchFragment(Const.FRAGMENT_PUBLIC_ACCOUNT);
-        getFragmentManager().beginTransaction().add(R.id.fragment_container,new DroidYueListFragment()).commit();
+        getFragmentManager().beginTransaction().add(R.id.fragment_container,new StylingAndroidListFragment()).commit();
     }
     @SuppressWarnings("all")
     private void initViews(){
@@ -37,6 +37,12 @@ public class MainActivity extends BaseActivity {
                         break;
                     case R.id.navigation_public_account:
                         switcher.switchFragment(Const.FRAGMENT_PUBLIC_ACCOUNT);
+                        break;
+                    case R.id.navigation_droid_yue:
+                        switcher.switchFragment(Const.FRAGMENT_DROID_YUE);
+                        break;
+                    case R.id.navigation_styling_android:
+                        switcher.switchFragment(Const.FRAGMENT_STYLING_ANDROID);
                         break;
                 }
                 if(drawerLayout.isDrawerOpen(Gravity.LEFT)){

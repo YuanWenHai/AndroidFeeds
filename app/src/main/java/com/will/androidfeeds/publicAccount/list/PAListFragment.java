@@ -54,7 +54,7 @@ public class PAListFragment extends BaseFragment implements ObservableScrollView
 
     @Override
     public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
-        int baseColor = getResources().getColor(R.color.android_green);
+        int baseColor = getResources().getColor(R.color.wechat_green);
         float alpha = Math.min(1, (float) scrollY / 720);
         toolbar.setBackgroundColor(ScrollUtils.getColorWithAlpha(alpha, baseColor));
         imageView.setTranslationY(-scrollY / 2);
