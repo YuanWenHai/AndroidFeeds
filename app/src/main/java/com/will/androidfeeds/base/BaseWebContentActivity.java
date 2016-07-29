@@ -29,10 +29,11 @@ public class BaseWebContentActivity extends BaseActivity implements ObservableSc
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.avtivity_csdn_content);
-        markedView = (MWebView) findViewById(R.id.csdn_content_marked_view);
+        setContentView(R.layout.avtivity_content_webview);
+        markedView = (MWebView) findViewById(R.id.content_marked_view);
         markedView.setScrollViewCallbacks(this);
-        toolbar = (Toolbar) findViewById(R.id.csdn_content_toolbar);
+        toolbar = (Toolbar) findViewById(R.id.content_toolbar);
+        setSupportActionBar(toolbar);
     }
     @Override
     public void onBackPressed(){

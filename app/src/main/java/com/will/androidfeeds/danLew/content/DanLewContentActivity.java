@@ -1,7 +1,6 @@
-package com.will.androidfeeds.droidyue.content;
+package com.will.androidfeeds.danLew.content;
 
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 
 import com.will.androidfeeds.base.BaseWebContentActivity;
 import com.will.androidfeeds.common.ErrorCode;
@@ -10,21 +9,20 @@ import com.will.androidfeeds.util.NetworkHelper;
 import com.will.androidfeeds.view.MWebView;
 
 /**
- * Created by Will on 2016/7/21.
+ * Created by Will on 2016/7/28.
  */
-public class DroidYueContentActivity extends BaseWebContentActivity {
+public class DanLewContentActivity extends BaseWebContentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Toolbar toolbar = getToolbar();
-        MWebView mWebView = getWebView();
-        loadContent(mWebView,getIntent().getStringExtra("url"));
+        MWebView webView = getWebView();
+        loadData(getIntent().getStringExtra("url"),webView);
     }
-    private void loadContent(final MWebView mWebView, String url){
+    private void loadData(String url, final MWebView webView){
         NetworkHelper.getInstance().loadWebSource(url, true, true, new NetworkHelper.LoadWebSourceCallback() {
             @Override
             public void onSuccess(String source) {
-                mWebView.setMDText(JsoupHelper.getDroidYueContentFromSource(source));
+                webView.setMDText(JsoupHelper.getDanLewContentFromSource(source));
             }
 
             @Override

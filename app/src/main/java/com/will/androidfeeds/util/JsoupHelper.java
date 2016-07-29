@@ -1,6 +1,7 @@
 package com.will.androidfeeds.util;
 
 import com.will.androidfeeds.bean.CsdnItem;
+import com.will.androidfeeds.bean.DanLewItem;
 import com.will.androidfeeds.bean.DroidYueItem;
 import com.will.androidfeeds.bean.HKItem;
 import com.will.androidfeeds.bean.PAItem;
@@ -164,5 +165,33 @@ public class JsoupHelper {
         article.select("div").remove();
         article.select("p[prefix]").remove();
         return article.html();
+    }
+
+    /**
+     * 默认返回五条
+     * @param source source
+     * @return result
+     */
+    public static List<DanLewItem> getDanLewItemFromSource(String source){
+        String host = "http://blog.danlew.net";
+        ArrayList<DanLewItem> list = new ArrayList<>();
+        DanLewItem item;
+        Document doc = Jsoup.parse(source);
+        Elements articles = doc.select("main#content").select("article");
+        for(Element element : articles){
+            item = new DanLewItem();
+            item.setTitle(element.select("h2.post-title").text());
+            item.setLink(host+element.select("h2.post-title").select("a").attr("href"));
+            item.setPreview(element.select("section.post-excerpt").text());
+            item.setTime(element.select("time.post-date").text());
+            list.add(item);
+        }
+        return list;
+    }
+    public static String getDanLewContentFromSource(String source){
+        Document doc = Jsoup.parse(source);
+        String header = doc.select("header.post-header").html();
+        String content = doc.select("section.post-content").html();
+        return header+content;
     }
 }

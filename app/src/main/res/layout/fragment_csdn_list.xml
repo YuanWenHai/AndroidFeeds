@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/status_bar_size"
+        android:background="@color/csdn_red_dark"/>
     <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -11,13 +19,13 @@
                 android:id="@+id/csdn_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/colorPrimaryDark"
+                android:background="@color/csdn_red"
                 app:layout_scrollFlags="scroll|enterAlways"/>
             <android.support.design.widget.TabLayout
                 android:id="@+id/csdn_tab_layout"
-                android:background="@color/colorPrimary"
+                android:background="@color/white"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize" />
+                android:layout_height="40dp" />
         </android.support.design.widget.AppBarLayout>
 
         <android.support.v4.view.ViewPager
@@ -34,3 +42,5 @@
             android:layout_margin="20dp" />
 
     </android.support.design.widget.CoordinatorLayout>
+
+</LinearLayout>

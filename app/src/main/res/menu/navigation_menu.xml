@@ -20,4 +20,7 @@
     <item android:id="@+id/navigation_styling_android"
         android:title="@string/styling_android"
         app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/navigation_dan_lew"
+        android:title="@string/dan_lew"/>
 </menu>

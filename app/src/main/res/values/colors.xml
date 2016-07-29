@@ -7,9 +7,29 @@
     <color name="dark_black">#111111</color>
     <color name="black">#333333</color>
     <color name="grey">#555555</color>
-    <color name="wechat_green">#78AB34</color>
     <color name="white">#eeeeee</color>
+
+
+    <color name="wechat_green">#8bc34a</color>
+    <color name="wechat_green_dark">#73b342</color>
+
+    <color name="csdn_red">#F44336</color>
+    <color name="csdn_red_dark">#E53935</color>
+    <color name="csdn_50">#ffebee</color>
+    <color name="csdn_100">#ffcdd2</color>
+
+    <color name="hukai_purple">#673AB7</color>
+    <color name="hukai_purple_dark">#5E35B1</color>
+    <color name="hukai_100">#d1c4e9</color>
+    <color name="hukai_50">#ede7f6</color>
+
     <color name="styling_android_color">#607D8B</color>
+    <color name="styling_android_color_dark">#546E7A</color>
     <color name="styling_android_100">#CFD8DC</color>
     <color name="styling_android_50">#ECEFF1</color>
+
+    <color name="dan_lew_color">#00BCD4</color>
+    <color name="dan_lew_color_dark">#00acc1</color>
+    <color name="dan_lew_50">#E0F7FA</color>
+    <color name="dan_lew_100">#B2EBF2</color>
 </resources>

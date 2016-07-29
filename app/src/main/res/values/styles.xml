@@ -6,18 +6,22 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowTranslucentStatus">true</item>
     </style>
-    <style name="CustomTheme" parent="AppTheme">
+    <style name="CustomTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:textColorPrimary">@android:color/white</item>
         <item name="android:textColorSecondary">@android:color/white</item>
+        <item name="android:windowTranslucentStatus">true</item>
     </style>
     <style name="PublicAccountTheme" parent="CustomTheme">
         <item name="colorPrimary">@color/wechat_green</item>
+        <item name="colorPrimaryDark">@color/wechat_green_dark</item>
     </style>
 
 
     <style name="DroidYueTheme" parent="CustomTheme">
-        <item name="colorPrimary">@color/black</item>
+        <item name="colorPrimary">@color/dark_black</item>
+        <item name="colorPrimaryDark">@color/dark_black</item>
 
     </style>
     <style name="DroidYueCollapsedTextAppearance" parent="TextAppearance.AppCompat">
@@ -32,6 +36,19 @@
 
     <style name="StylingAndroidTheme" parent="CustomTheme">
         <item name="colorPrimary">@color/styling_android_color</item>
+        <item name="colorPrimaryDark">@color/styling_android_color_dark</item>
+    </style>
+    <style name="DanLewTheme" parent="CustomTheme">
+        <item name="colorPrimary">@color/dan_lew_color</item>
+        <item name="colorPrimaryDark">@color/dan_lew_color_dark</item>
+    </style>
+    <style name="CsdnTheme" parent="CustomTheme">
+        <item name="colorPrimary">@color/csdn_red</item>
+        <item name="colorPrimaryDark">@color/csdn_red_dark</item>
+    </style>
+    <style name="HuKaiTheme" parent="CustomTheme">
+        <item name="colorPrimary">@color/hukai_purple</item>
+        <item name="colorPrimaryDark">@color/hukai_purple_dark</item>
     </style>
 
 </resources>

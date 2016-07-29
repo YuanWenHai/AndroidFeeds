@@ -19,8 +19,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".csdn.content.CsdnContentActivity"/>
-        <activity android:name=".hukai.content.HKContentActivity"/>
+        <activity android:name=".csdn.content.CsdnContentActivity"
+            android:theme="@style/CsdnTheme"/>
+        <activity android:name=".hukai.content.HKContentActivity"
+            android:theme="@style/HuKaiTheme"/>
         <activity android:name=".publicAccount.list.PAContentList"
             android:theme="@style/PublicAccountTheme"/>
         <activity android:name=".publicAccount.content.PAContentActivity"
@@ -29,6 +31,8 @@
             android:theme="@style/DroidYueTheme"/>
         <activity android:name=".stylingAndroid.content.StylingAndroidContentActivity"
             android:theme="@style/StylingAndroidTheme"/>
+        <activity android:name=".danLew.content.DanLewContentActivity"
+            android:theme="@style/DanLewTheme"/>
     </application>
 
 </manifest>

@@ -23,7 +23,6 @@ public class HKContentActivity extends BaseWebContentActivity {
         webView= getWebView();
         HKItem item = (HKItem) getIntent().getSerializableExtra("item");
         toolbar.setTitle("Content");
-        setSupportActionBar(toolbar);
         getContentData(item);
 
     }

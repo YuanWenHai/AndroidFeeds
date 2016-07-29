@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/frame_layout">
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/test_refresh"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/test_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
+        <com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader
+            android:id="@+id/test_parallax"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:id="@+id/test_image"
+                android:background="@color/styling_android_color"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/styling_android_parallax_height">
+                <ImageView
+                    android:id="@+id/logo"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:padding="5dp"
+                    android:src="@drawable/styling_android_logo"/>
+                <TextView
+                    android:id="@+id/styling_android_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/styling_android"
+                    android:layout_toEndOf="@id/logo"
+                    android:textColor="@color/styling_android_50"
+                    android:textSize="25sp"
+                    android:layout_marginTop="10dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/logo"
+                    android:padding="5dp"
+                    android:layout_below="@id/styling_android_title"
+                    android:text="@string/styling_android_info"
+                    android:textColor="@color/styling_android_100"/>
+                <TextView
+                    android:id="@+id/styling_android_list_text"
+                    android:padding="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/logo"
+                    android:maxLines="4"
+                    android:drawableBottom="@drawable/ic_arrow_drop_down_white_24dp"
+                    android:textColor="@color/styling_android_100"
+                    android:text="@string/styling_android_about"/>
+            </RelativeLayout>
+        </com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <View
+                android:background="@color/wechat_green_dark"
+                android:id="@+id/status_bar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/status_bar_size" />
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/test_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"/>
+        </LinearLayout>
+
+    </FrameLayout>

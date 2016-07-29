@@ -6,6 +6,7 @@ import android.app.FragmentManager;
 import com.will.androidfeeds.R;
 import com.will.androidfeeds.common.Const;
 import com.will.androidfeeds.csdn.list.CsdnListFragment;
+import com.will.androidfeeds.danLew.list.DanLewListFragment;
 import com.will.androidfeeds.droidyue.list.DroidYueListFragment;
 import com.will.androidfeeds.hukai.list.HKListFragment;
 import com.will.androidfeeds.publicAccount.list.PAListFragment;
@@ -20,7 +21,7 @@ public class FragmentSwitcher {
         mFragmentManager = manager;
     }
     private static final int[] fragments = {Const.FRAGMENT_CSDN,Const.FRAGMENT_HUKAI,Const.FRAGMENT_PUBLIC_ACCOUNT,Const.FRAGMENT_DROID_YUE,
-            Const.FRAGMENT_STYLING_ANDROID};
+            Const.FRAGMENT_STYLING_ANDROID,Const.FRAGMENT_DANLEW};
     public void switchFragment(int which){
         Fragment fragment;
         switch (which){
@@ -67,6 +68,14 @@ public class FragmentSwitcher {
                 }
                 closeOtherFragment(which);
                 break;
+            case Const.FRAGMENT_DANLEW:
+                if((fragment = getFragment(which)) != null){
+                    mFragmentManager.beginTransaction().show(fragment).commit();
+                }else{
+                    mFragmentManager.beginTransaction().add(R.id.fragment_container,new DanLewListFragment(),"dan_lew").commit();
+                }
+                closeOtherFragment(which);
+                break;
         }
     }
 
@@ -101,6 +110,7 @@ public class FragmentSwitcher {
                 fragment = mFragmentManager.findFragmentByTag("styling_android");
                 break;
             case Const.FRAGMENT_DANLEW:
+                fragment = mFragmentManager.findFragmentByTag("dan_lew");
                 break;
         }
         return fragment ;

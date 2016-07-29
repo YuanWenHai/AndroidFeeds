@@ -2,7 +2,7 @@ package com.will.androidfeeds.bean;
 
 /**
  * Created by Will on 2016/7/21.
- * Dan Lew.
+ * Dan Lew Code.
  */
 public class DanLewItem {
     private String title,link,time,preview;

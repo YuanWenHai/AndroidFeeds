@@ -16,4 +16,7 @@ I decided to write this blog because, while there is plenty of information regar
 It is assumed that the reader is familiar with Android development in general.\n
 \n
 The views expressed within this blog are mine and do not represent those of my employer.\n</string>
+    <string name="dan_lew">Dan Lew</string>
+    <string name="dan_lew_info">Thoughts on life, the universe and the mystery of it all; but actually mostly just code.</string>
+    <string name="hukai_about"><br>Hi，我是<b>胡凯</b>，就职于腾讯从事Android开发的工作。有任何问题，你可以直接写<a href="mailto:hukai.me@gmail.com"><b>邮件</b></a>给我，也可以通过<a href="http://weibo.com/kesenhoo" target="_blank"><b>微博</b></a>联系到我，另外还可以关注我的<a href="https://github.com/kesenhoo" target="_blank"><b>Github</b></a>，欢迎一起学习交流！</br></string>
 </resources>

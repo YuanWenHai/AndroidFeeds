@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/hukai_list_toolbar"
-        android:layout_width="match_parent"
-        android:background="@color/colorPrimary"
-        android:layout_height="?attr/actionBarSize"/>
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/hukai_refresh_layout"
         android:layout_width="match_parent"
@@ -16,4 +13,47 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </android.support.v4.widget.SwipeRefreshLayout>
-</LinearLayout>
+    <com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader
+        android:id="@+id/hukai_list_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:id="@+id/hukai_list_parallax"
+            android:layout_width="match_parent"
+            android:background="@color/hukai_purple"
+            android:layout_height="@dimen/hukai_parallax_height">
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
+                android:layout_marginStart="20dp"
+                android:text="@string/hukai"
+                android:textSize="25sp"
+                android:textColor="@color/hukai_50"/>
+            <org.sufficientlysecure.htmltextview.HtmlTextView
+                android:id="@+id/hukai_list_about"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/title"
+                android:padding="15dp"
+                tools:text="@string/hukai_about"
+                android:textColor="@color/hukai_100"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+    </com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <View
+            android:id="@+id/list_status_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/status_bar_size"/>
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/list_toolbar"
+            android:layout_width="match_parent"
+            android:background="@color/hukai_purple"
+            android:layout_height="?attr/actionBarSize"/>
+    </LinearLayout>
+</FrameLayout>

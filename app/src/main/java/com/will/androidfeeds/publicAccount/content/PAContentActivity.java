@@ -20,7 +20,6 @@ public class PAContentActivity extends BaseWebContentActivity {
         super.onCreate(savedInstanceState);
         webView = getWebView();
         Toolbar toolbar = getToolbar();
-        setSupportActionBar(toolbar);
         getData(getIntent().getStringExtra("url"));
     }
     private void getData(String url){

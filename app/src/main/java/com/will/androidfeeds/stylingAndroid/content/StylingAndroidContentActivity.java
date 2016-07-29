@@ -18,7 +18,6 @@ public class StylingAndroidContentActivity extends BaseWebContentActivity {
         super.onCreate(savedInstanceState);
         Toolbar toolbar = getToolbar();
         MWebView mWebView = getWebView();
-        setSupportActionBar(toolbar);
         loadData(getIntent().getStringExtra("url"),mWebView);
     }
     private void loadData(String url, final MWebView mWebView){
