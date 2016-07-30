@@ -1,76 +1,28 @@
 package com.will.androidfeeds;
 
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
+import android.widget.TextView;
 
-import com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader;
-import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.will.androidfeeds.base.BaseFragment;
-import com.will.androidfeeds.droidyue.list.DroidYueAdapter;
 
 /**
  * Created by Will on 2016/7/29.
  */
 public class TestFragment extends BaseFragment {
-    Toolbar toolbar;
-    RecyclerViewHeader parallax;
-    RelativeLayout imageView;
-    View statusBar;
-    int parallaxHeight = (200)*4;
-    int scrolledHeight = 0;
-    AppCompatActivity mActivity;
+
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
         //View view = inflater.inflate(R.layout.fragment_test,container,false);
         View view = getInflaterWithTheme(inflater,R.style.StylingAndroidTheme).inflate(R.layout.fragment_test,container,false);
-        SwipeRefreshLayout refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.test_refresh);
-        refreshLayout.setProgressViewOffset(true,800,1000);
-        toolbar = (Toolbar) view.findViewById(R.id.test_toolbar);
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                return false;
-            }
-        });
-        parallax = (RecyclerViewHeader) view.findViewById(R.id.test_parallax);
-        imageView = (RelativeLayout) view.findViewById(R.id.test_image);
-        statusBar = view.findViewById(R.id.status_bar);
-        toolbar.setBackgroundColor(ScrollUtils.getColorWithAlpha(0,getResources().getColor(R.color.colorPrimary)));
-        statusBar.setBackgroundColor(ScrollUtils.getColorWithAlpha(0,getResources().getColor(R.color.colorPrimary)));
-        mActivity = ((AppCompatActivity)getActivity());
-        setupToolbar(toolbar);
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.test_recycler);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        parallax.attachTo(recyclerView);
-        recyclerView.setAdapter(new DroidYueAdapter());
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                scrolledHeight += dy;
-                Log.e("dy",scrolledHeight+"");
-                int toolbarColor = getResources().getColor(R.color.colorPrimary);
-                int statusBarColor= getResources().getColor(R.color.colorPrimaryDark);
-                if(scrolledHeight < parallaxHeight){
-                    float alpha = Math.min(1, (float) scrolledHeight / parallaxHeight);
-                    imageView.setTranslationY(scrolledHeight/2);
-                    toolbar.setBackgroundColor(ScrollUtils.getColorWithAlpha(alpha, toolbarColor));
-                    statusBar.setBackgroundColor(ScrollUtils.getColorWithAlpha(alpha,statusBarColor));
-                }else{
-                    toolbar.setBackgroundColor(toolbarColor);
-                    statusBar.setBackgroundColor(statusBarColor);
-                }
-            }
-        });
+        TextView textView = (TextView) view.findViewById(R.id.test_html);
+        textView.setText(Html.fromHtml(content));
+        textView.setMovementMethod(LinkMovementMethod.getInstance());
         return view;
     }
+    private String content = "<br>Hi，我是<b>胡凯</b>，就职于腾讯从事Android开发的工作。有任何问题，你可以直接写<a href=\"mailto:hukai.me@gmail.com\"><b>邮件</b></a>给我，也可以通过<a href=\"http://weibo.com/kesenhoo\" target=\"_blank\"><b>微博</b></a>联系到我，另外还可以关注我的<a href=\"https://github.com/kesenhoo\" target=\"_blank\"><b>Github</b></a>，欢迎一起学习交流！</br>";
 }

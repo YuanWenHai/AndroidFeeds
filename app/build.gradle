@@ -46,5 +46,6 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.bartoszlipinski:recyclerviewheader2:2.0.1'
     compile 'org.sufficientlysecure:html-textview:1.8'
+    compile 'com.orhanobut:logger:1.15'
 
 }

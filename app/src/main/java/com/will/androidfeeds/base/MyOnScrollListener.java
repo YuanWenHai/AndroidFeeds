@@ -2,7 +2,6 @@ package com.will.androidfeeds.base;
 
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 
 import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
@@ -27,8 +26,6 @@ public class MyOnScrollListener extends RecyclerView.OnScrollListener {
     @Override
     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
         scrolledHeight += dy;
-        Log.e("dy",scrolledHeight+"");
-
         if(scrolledHeight < parallaxHeight){
             float alpha = Math.min(1, (float) scrolledHeight / parallaxHeight);
             parallaxLayout.setTranslationY(scrolledHeight/2);

@@ -28,8 +28,8 @@
     <color name="styling_android_100">#CFD8DC</color>
     <color name="styling_android_50">#ECEFF1</color>
 
-    <color name="dan_lew_color">#00BCD4</color>
-    <color name="dan_lew_color_dark">#00acc1</color>
-    <color name="dan_lew_50">#E0F7FA</color>
-    <color name="dan_lew_100">#B2EBF2</color>
+    <color name="dan_lew_color">#2196f3</color>
+    <color name="dan_lew_color_dark">#1e88e5</color>
+    <color name="dan_lew_50">#e3f2fd</color>
+    <color name="dan_lew_100">#bbdefb</color>
 </resources>

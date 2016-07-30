@@ -1,39 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
-   <android.support.design.widget.AppBarLayout
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:fitsSystemWindows="true">
-       <android.support.design.widget.CollapsingToolbarLayout
-           android:fitsSystemWindows="true"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           app:title="@string/droid_yue"
-           app:collapsedTitleTextAppearance="@style/DroidYueCollapsedTextAppearance"
-           app:expandedTitleTextAppearance="@style/DroidYueExpandedTextAppearance"
-           app:layout_scrollFlags="scroll|exitUntilCollapsed"
-           app:contentScrim="@color/dark_black">
-           <ImageView
-               android:fitsSystemWindows="true"
-               android:id="@+id/droid_yue_list_parallax_image"
-               android:layout_width="match_parent"
-               android:layout_height="@dimen/droid_parallax_height"
-               app:layout_collapseMode="parallax"
-               android:scaleType="fitXY"
-               android:src="@drawable/black_cabin"/>
-           <android.support.v7.widget.Toolbar
-               android:id="@+id/droid_yue_list_toolbar"
-               android:layout_width="match_parent"
-               app:layout_collapseMode="pin"
-               app:theme="@style/ThemeOverlay.AppCompat.Dark"
-               android:layout_height="?attr/actionBarSize" />
-       </android.support.design.widget.CollapsingToolbarLayout>
-   </android.support.design.widget.AppBarLayout>
            <android.support.v4.widget.SwipeRefreshLayout
                android:id="@+id/droid_yue_list_refresh_layout"
                android:layout_width="match_parent"
@@ -46,4 +16,44 @@
                    android:layout_height="wrap_content"
                    android:scrollbars="vertical"/>
            </android.support.v4.widget.SwipeRefreshLayout>
-</android.support.design.widget.CoordinatorLayout>
+    <com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader
+        android:id="@+id/droid_yue_list_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:id="@+id/droid_yue_list_parallax"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/droid_yue_parallax_height">
+            <ImageView
+                android:fitsSystemWindows="true"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/droid_yue_parallax_height"
+                app:layout_collapseMode="parallax"
+                android:scaleType="fitXY"
+                android:src="@drawable/black_cabin"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="50dp"
+                android:layout_marginTop="50dp"
+                android:text="@string/droid_yue"
+                android:textSize="25sp"
+                android:textColor="@color/white"/>
+        </RelativeLayout>
+    </com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <View
+            android:id="@+id/list_status_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/status_bar_size"/>
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/list_toolbar"
+            android:layout_width="match_parent"
+            android:background="@color/dark_black"
+            android:layout_height="?attr/actionBarSize"/>
+    </LinearLayout>
+</FrameLayout>

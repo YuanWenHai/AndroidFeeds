@@ -1,26 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:id="@+id/navigation_csdn"
-        android:title="@string/csdn"
-        app:showAsAction="ifRoom"/>
-    <item
-        android:id="@+id/navigation_hukai"
-        android:title="@string/hukai"
-        app:showAsAction="ifRoom"/>
-    <item
-        android:id="@+id/navigation_public_account"
-        android:title="@string/public_account"
-        app:showAsAction="ifRoom"/>
-    <item
-        android:id="@+id/navigation_droid_yue"
-        android:title="@string/droid_yue"
-        app:showAsAction="ifRoom"/>
-    <item android:id="@+id/navigation_styling_android"
-        android:title="@string/styling_android"
-        app:showAsAction="ifRoom"/>
-    <item
-        android:id="@+id/navigation_dan_lew"
-        android:title="@string/dan_lew"/>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/navigation_csdn"
+            android:title="@string/csdn"
+            app:showAsAction="ifRoom"/>
+        <item
+            android:id="@+id/navigation_hukai"
+            android:title="@string/hukai"
+            app:showAsAction="ifRoom"/>
+        <item
+            android:id="@+id/navigation_public_account"
+            android:title="@string/public_account"
+            app:showAsAction="ifRoom"/>
+        <item
+            android:id="@+id/navigation_droid_yue"
+            android:title="@string/droid_yue"
+            app:showAsAction="ifRoom"/>
+        <item android:id="@+id/navigation_styling_android"
+            android:title="@string/styling_android"
+            app:showAsAction="ifRoom"/>
+        <item
+            android:id="@+id/navigation_dan_lew"
+            android:title="@string/dan_lew"/>
+    </group>
+
 </menu>

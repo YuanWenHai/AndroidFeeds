@@ -2,7 +2,10 @@ package com.will.androidfeeds.util;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.os.Handler;
+import android.os.Looper;
 
+import com.orhanobut.logger.Logger;
 import com.will.androidfeeds.R;
 import com.will.androidfeeds.common.Const;
 import com.will.androidfeeds.csdn.list.CsdnListFragment;
@@ -17,10 +20,13 @@ import com.will.androidfeeds.stylingAndroid.list.StylingAndroidListFragment;
  */
 public class FragmentSwitcher {
     private FragmentManager mFragmentManager;
+    private Handler mHandler;
     public FragmentSwitcher(FragmentManager manager){
         mFragmentManager = manager;
+        mHandler = new Handler(Looper.getMainLooper());
     }
-    private static final int[] fragments = {Const.FRAGMENT_CSDN,Const.FRAGMENT_HUKAI,Const.FRAGMENT_PUBLIC_ACCOUNT,Const.FRAGMENT_DROID_YUE,
+    private static final int[] fragments = {Const.FRAGMENT_CSDN,Const.FRAGMENT_HUKAI,
+            Const.FRAGMENT_PUBLIC_ACCOUNT,Const.FRAGMENT_DROID_YUE,
             Const.FRAGMENT_STYLING_ANDROID,Const.FRAGMENT_DANLEW};
     public void switchFragment(int which){
         Fragment fragment;
@@ -28,9 +34,18 @@ public class FragmentSwitcher {
             case Const.FRAGMENT_CSDN:
 
                 if((fragment = getFragment(which)) != null){
-                    mFragmentManager.beginTransaction().show(fragment).commit();
+                    mFragmentManager.beginTransaction()
+                            .setCustomAnimations(R.animator.animator_in,R.animator.animator_out)
+                            .show(fragment).commit();
                 }else{
-                    mFragmentManager.beginTransaction().add(R.id.fragment_container,new CsdnListFragment(),"csdn").commit();
+                    /*mFragmentManager.beginTransaction()
+                            .setCustomAnimations(R.animator.animator_in,R.animator.animator_out)
+                            .add(R.id.fragment_loading_container,new LoadingFragment(),"loading")
+                            .commit();*/
+                    mFragmentManager.beginTransaction()
+                            .setCustomAnimations(R.animator.animator_in,R.animator.animator_out)
+                            .add(R.id.fragment_container,new CsdnListFragment(),"csdn")
+                            .commit();
                 }
                 closeOtherFragment(which);
                 break;
@@ -38,17 +53,33 @@ public class FragmentSwitcher {
             case Const.FRAGMENT_HUKAI:
 
                 if((fragment = getFragment(which)) != null){
-                    mFragmentManager.beginTransaction().show(fragment).commit();
+                    mFragmentManager.beginTransaction()
+                            .setCustomAnimations(R.animator.animator_in,R.animator.animator_out)
+                            .show(fragment).commit();
                 }else{
-                    mFragmentManager.beginTransaction().add(R.id.fragment_container,new HKListFragment(),"hukai").commit();
+                    Logger.e("switcher before create");
+                    mFragmentManager.beginTransaction()
+                            .setCustomAnimations(R.animator.animator_in,R.animator.animator_out)
+                            .add(R.id.fragment_container,new HKListFragment(),"hukai").commit();
+                    Logger.e("switcher after create");
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            Logger.e("post execute");
+                        }
+                    });
                 }
                 closeOtherFragment(which);
                 break;
             case Const.FRAGMENT_PUBLIC_ACCOUNT:
                 if((fragment = getFragment(which)) != null){
-                    mFragmentManager.beginTransaction().show(fragment).commit();
+                    mFragmentManager.beginTransaction()
+                            .setCustomAnimations(R.animator.animator_in,R.animator.animator_out)
+                            .show(fragment).commit();
                 }else{
-                    mFragmentManager.beginTransaction().add(R.id.fragment_container,new PAListFragment(),"public_account").commit();
+                    mFragmentManager.beginTransaction()
+                            .setCustomAnimations(R.animator.animator_in,R.animator.animator_out)
+                            .add(R.id.fragment_container,new PAListFragment(),"public_account").commit();
                 }
                 closeOtherFragment(which);
                 break;
@@ -56,39 +87,55 @@ public class FragmentSwitcher {
                 if((fragment = getFragment(which)) != null){
                     mFragmentManager.beginTransaction().show(fragment).commit();
                 }else{
-                    mFragmentManager.beginTransaction().add(R.id.fragment_container,new DroidYueListFragment(),"droid_yue").commit();
+                    mFragmentManager.beginTransaction()
+                            .setCustomAnimations(R.animator.animator_in,R.animator.animator_out)
+                            .add(R.id.fragment_container,new DroidYueListFragment(),"droid_yue").commit();
                 }
                 closeOtherFragment(which);
                 break;
             case Const.FRAGMENT_STYLING_ANDROID:
                 if((fragment = getFragment(which)) != null){
-                    mFragmentManager.beginTransaction().show(fragment).commit();
+                    mFragmentManager.beginTransaction()
+                            .setCustomAnimations(R.animator.animator_in,R.animator.animator_out)
+                            .show(fragment).commit();
                 }else{
-                    mFragmentManager.beginTransaction().add(R.id.fragment_container,new StylingAndroidListFragment(),"styling_android").commit();
+                    mFragmentManager.beginTransaction()
+                            .setCustomAnimations(R.animator.animator_in,R.animator.animator_out)
+                            .add(R.id.fragment_container,new StylingAndroidListFragment(),"styling_android").commit();
                 }
                 closeOtherFragment(which);
                 break;
             case Const.FRAGMENT_DANLEW:
                 if((fragment = getFragment(which)) != null){
-                    mFragmentManager.beginTransaction().show(fragment).commit();
+                    mFragmentManager.beginTransaction()
+                            .setCustomAnimations(R.animator.animator_in,R.animator.animator_out)
+                            .show(fragment).commit();
                 }else{
-                    mFragmentManager.beginTransaction().add(R.id.fragment_container,new DanLewListFragment(),"dan_lew").commit();
+                    mFragmentManager.beginTransaction()
+                            .setCustomAnimations(R.animator.animator_in,R.animator.animator_out)
+                            .add(R.id.fragment_container,new DanLewListFragment(),"dan_lew").commit();
                 }
                 closeOtherFragment(which);
                 break;
         }
     }
 
-    public void closeOtherFragment(int which){
-        Fragment fragment;
-        for(int code : fragments){
-            if(code != which){
-                if((fragment = getFragment(code)) != null){
-                    mFragmentManager.beginTransaction().hide(fragment).
-                            setCustomAnimations(R.animator.animator_in,R.animator.animator_out).commit();
+    public void closeOtherFragment(final int which){
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Fragment fragment;
+                for(int code : fragments){
+                    if(code != which){
+                        if((fragment = getFragment(code)) != null){
+                            mFragmentManager.beginTransaction()
+                                    .setCustomAnimations(R.animator.animator_in,R.animator.animator_out)
+                                    .hide(fragment).commit();
+                        }
+                    }
                 }
             }
-        }
+        },0);
 
     }
     public Fragment getFragment(int which){

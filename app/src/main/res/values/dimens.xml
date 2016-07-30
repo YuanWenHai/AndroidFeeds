@@ -1,12 +1,13 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="droid_parallax_height">180dp</dimen>
     <dimen name="status_bar_size">24dp</dimen>
+
+    <dimen name="droid_yue_parallax_height">180dp</dimen>
     <dimen name="styling_android_parallax_height">180dp</dimen>
     <dimen name="hukai_parallax_height">180dp</dimen>
+    <dimen name="dan_lew_parallax_height">180dp</dimen>
 
     <dimen name="refresh_layout_offset">40dp</dimen>
     <dimen name="header_margin">50dp</dimen>
+    <dimen name="navigation_header_height">178dp</dimen>
 </resources>
