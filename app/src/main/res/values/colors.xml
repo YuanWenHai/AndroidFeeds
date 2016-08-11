@@ -32,4 +32,7 @@
     <color name="dan_lew_color_dark">#1e88e5</color>
     <color name="dan_lew_50">#e3f2fd</color>
     <color name="dan_lew_100">#bbdefb</color>
+
+    <color name="favorite_color">#3f51b5</color>
+    <color name="favorite_color_dark">#3949ab</color>
 </resources>

@@ -36,7 +36,8 @@ public  class HKListRecyclerAdapter extends CustomRecyclerAdapter<HKItem> {
                 }
                 HKItem hkItem = (HKItem) item;
                 Intent intent = new Intent(mContext, HKContentActivity.class);
-                intent.putExtra("item",hkItem);
+                intent.putExtra("url",hkItem.getLink());
+                intent.putExtra("title",hkItem.getTitle());
                 mContext.startActivity(intent);
             }
         });

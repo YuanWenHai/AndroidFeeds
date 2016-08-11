@@ -36,7 +36,7 @@ public class DanLewListFragment extends BaseFragment implements SwipeRefreshLayo
 
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setProgressViewOffset(true,parallaxHeight-50,parallaxHeight+getRefreshLayoutDragOffset());
-        refreshLayout.setColorSchemeColors(R.color.dan_lew_color);
+        refreshLayout.setColorSchemeColors(getResources().getColor(R.color.dan_lew_color));
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         header.attachTo(recyclerView);

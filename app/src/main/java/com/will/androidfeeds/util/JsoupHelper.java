@@ -21,17 +21,10 @@ import java.util.List;
 public class JsoupHelper {
     public static String getCsdnContentFromSource(String source){
         Document doc = Jsoup.parse(source);
-        String content = doc.select("div.markdown_views").toString();
-        if(content.isEmpty()){
-            content =  doc.select("div.article_content").html();
-        }
-        return content;
-    }
-    public static String getCsdnMobileContentFromSource(String source){
-        Document doc = Jsoup.parse(source);
         doc.outputSettings(new Document.OutputSettings().prettyPrint(false));
         Elements content = doc.select("div.blog_article_c.clearfix");
-        return content.toString();
+        String contentStr = content.toString();
+        return contentStr.substring(0,contentStr.lastIndexOf("</div>"));
     }
     public static List<CsdnItem> getCsdnListItemFromSource(String source){
         //Log.e("source.length = :",""+source.length());
@@ -55,6 +48,7 @@ public class JsoupHelper {
         return Integer.parseInt(temp.substring(0,temp.indexOf("条")));
     }
     public static List<HKItem> getHKItemFromSource(String source){
+        String HUKAI_HOST = "http://hukai.me";
         Document doc = Jsoup.parse(source);
         ArrayList<HKItem> list = new ArrayList<>();
         HKItem item;
@@ -64,7 +58,7 @@ public class JsoupHelper {
             item = new HKItem();
             article.select("img").remove();
             item.setTitle(article.select("h1.entry-title").text());
-            item.setLink(article.select("h1.entry-title").select("a[href]").attr("href"));
+            item.setLink(HUKAI_HOST+article.select("h1.entry-title").select("a[href]").attr("href"));
             item.setTime(article.select("time[datetime]").text());
             item.setPreview(article.select("div.entry-content").html());
             list.add(item);
@@ -193,5 +187,21 @@ public class JsoupHelper {
         String header = doc.select("header.post-header").html();
         String content = doc.select("section.post-content").html();
         return header+content;
+    }
+    public static String getAppropriateTypeContentFromSource(String url,String source){
+        if(url.contains("csdn")){
+            return getCsdnContentFromSource(source);
+        } else if (url.contains("hukai")){
+            return getHKContentFromSource(source);
+        } else if (url.contains("chuansong")){
+            return getPAContentFromSource(source);
+        } else if (url.contains("droidyue")){
+            return getDroidYueContentFromSource(source);
+        } else if (url.contains("stylingandroid")){
+            return getStylingAndroidContentFromSource(source);
+        } else if (url.contains("danlew")){
+            return getDanLewContentFromSource(source);
+        }else
+            return source;
     }
 }

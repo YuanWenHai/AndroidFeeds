@@ -8,16 +8,14 @@ import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import com.will.androidfeeds.MainActivity;
 import com.will.androidfeeds.R;
-import com.will.androidfeeds.common.Tools;
 
 /**
  * Created by Will on 2016/7/7.
  */
 public class BaseFragment extends Fragment {
-    public void showToast(String message){
-        Tools.showToast(message);
-    }
+
     public LayoutInflater getInflaterWithTheme(LayoutInflater inflater,int style){
         Context contextWithTheme = new ContextThemeWrapper(getActivity(), style);
         return inflater.cloneInContext(contextWithTheme);
@@ -26,12 +24,12 @@ public class BaseFragment extends Fragment {
         AppCompatActivity mActivity = (AppCompatActivity) getActivity();
         mActivity.setSupportActionBar(toolbar);
         toolbar.setAlpha(0);
-        mActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //mActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Tools.showToast("clicked");
+                ((MainActivity)getActivity()).openDrawer();
             }
         });
     }

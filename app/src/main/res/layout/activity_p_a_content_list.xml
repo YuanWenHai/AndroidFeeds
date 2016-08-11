@@ -2,6 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <View
+        android:background="?attr/colorPrimaryDark"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/status_bar_size"/>
     <android.support.v7.widget.Toolbar
         android:id="@+id/public_account_list_toolbar"
         android:layout_width="match_parent"

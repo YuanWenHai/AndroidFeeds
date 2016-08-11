@@ -1,16 +1,21 @@
-package com.will.androidfeeds.stylingAndroid.content;
+package com.will.androidfeeds.favorite.content;
 
 import com.will.androidfeeds.base.BaseWebContentActivity;
 
 /**
- * Created by Will on 2016/7/21.
+ * Created by Will on 2016/8/11.
  */
-public class StylingAndroidContentActivity extends BaseWebContentActivity {
+public class FavoriteContentActivity extends BaseWebContentActivity {
+
 
     @Override
-    protected boolean appendTitleToContent(){
-        return true;
+    public void onBackPressed() {
+        if(isFavoriteStateHasChanged()){
+            setResult(888);
+        }
+        super.onBackPressed();
     }
+
     @Override
     public String getContentUrl() {
         return getIntent().getStringExtra("url");

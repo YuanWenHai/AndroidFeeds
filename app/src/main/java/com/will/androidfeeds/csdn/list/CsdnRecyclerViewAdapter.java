@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.will.androidfeeds.R;
 import com.will.androidfeeds.bean.CsdnItem;
 import com.will.androidfeeds.common.ErrorCode;
-import com.will.androidfeeds.common.Tools;
+import com.will.androidfeeds.util.Tools;
 import com.will.androidfeeds.util.JsoupHelper;
 import com.will.androidfeeds.util.NetworkHelper;
 

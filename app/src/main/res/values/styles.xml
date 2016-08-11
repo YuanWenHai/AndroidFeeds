@@ -50,5 +50,9 @@
         <item name="colorPrimary">@color/hukai_purple</item>
         <item name="colorPrimaryDark">@color/hukai_purple_dark</item>
     </style>
+    <style name="FavoriteTheme" parent="CustomTheme">
+        <item name="colorPrimary">@color/favorite_color</item>
+        <item name="colorPrimaryDark">@color/favorite_color_dark</item>
+    </style>
 
 </resources>

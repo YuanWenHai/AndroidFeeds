@@ -6,6 +6,7 @@
     <dimen name="styling_android_parallax_height">180dp</dimen>
     <dimen name="hukai_parallax_height">180dp</dimen>
     <dimen name="dan_lew_parallax_height">180dp</dimen>
+    <dimen name="public_account_parallax_height">180dp</dimen>
 
     <dimen name="refresh_layout_offset">40dp</dimen>
     <dimen name="header_margin">50dp</dimen>

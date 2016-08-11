@@ -1,6 +1,7 @@
-package com.will.androidfeeds.common;
+package com.will.androidfeeds.util;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.widget.Toast;
@@ -53,5 +54,8 @@ public class Tools {
         }
         mToast.setText(message);
         mToast.show();
+    }
+    public static SharedPreferences getFavoriteSP(){
+        return  MyApplication.getGlobalContext().getSharedPreferences("favorite_log",Context.MODE_PRIVATE);
     }
 }

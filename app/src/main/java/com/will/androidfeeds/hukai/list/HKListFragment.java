@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader;
-import com.orhanobut.logger.Logger;
 import com.will.androidfeeds.R;
 import com.will.androidfeeds.base.BaseFragment;
 import com.will.androidfeeds.base.MyOnScrollListener;
@@ -27,8 +26,7 @@ public class HKListFragment extends BaseFragment implements SwipeRefreshLayout.O
     private HKListRecyclerAdapter mAdapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        Logger.e("onCreateView beginning");
-        View view = inflater.inflate(R.layout.fragment_hukai_list,container,false);
+        View view = getInflaterWithTheme(inflater,R.style.HuKaiTheme).inflate(R.layout.fragment_hukai_list,container,false);
         int parallaxHeight = getResources().getDimensionPixelSize(R.dimen.hukai_parallax_height);
         int colorPrimaryDark = getResources().getColor(R.color.hukai_purple_dark);
         View parallaxLayout = view.findViewById(R.id.hukai_list_parallax);
@@ -54,15 +52,6 @@ public class HKListFragment extends BaseFragment implements SwipeRefreshLayout.O
         recyclerView.setAdapter(mAdapter);
         MyOnScrollListener onScrollListener = new MyOnScrollListener(parallaxHeight,colorPrimaryDark,parallaxLayout,toolbar,statusBar);
         recyclerView.addOnScrollListener(onScrollListener);
-        recyclerView.post(new Runnable() {
-            @Override
-            public void run() {
-                //((MainActivity)getActivity()).showContainer();
-                //((MainActivity)getActivity()).hideLoading();
-                //((MainActivity)getActivity()).closeDrawer();
-            }
-        });
-        Logger.e("onCreateView end");
         return view;
     }
 

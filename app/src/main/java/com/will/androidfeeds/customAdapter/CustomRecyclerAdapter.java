@@ -30,7 +30,6 @@ public abstract class CustomRecyclerAdapter<T> extends RecyclerView.Adapter<Recy
     private int loadingViewRes;
     private int layoutRes;
     private int loadingFailedViewRes;
-
     private boolean loadingSuccessful = true;
     private RecyclerView mRecyclerView;
     public CustomRecyclerAdapter(int layoutRes, int loadingViewRes, int loadingFailedViewRes){

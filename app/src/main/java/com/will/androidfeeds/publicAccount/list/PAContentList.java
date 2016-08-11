@@ -24,6 +24,7 @@ public class PAContentList extends BaseActivity implements SwipeRefreshLayout.On
         setContentView(R.layout.activity_p_a_content_list);
         refreshLayout = (SwipeRefreshLayout) findViewById(R.id.public_account_list_refresh_layout);
         refreshLayout.setOnRefreshListener(this);
+        refreshLayout.setColorSchemeColors(getResources().getColor(R.color.wechat_green));
         RecyclerView recyclerView= (RecyclerView) findViewById(R.id.public_account_list_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 

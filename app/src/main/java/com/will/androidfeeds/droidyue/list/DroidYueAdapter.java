@@ -33,6 +33,7 @@ public class DroidYueAdapter extends CustomRecyclerAdapter<DroidYueItem> {
                 Context mContext = getRecyclerView().getContext();
                 Intent intent = new Intent(mContext, DroidYueContentActivity.class);
                 intent.putExtra("url",droidYueItem.getLink());
+                intent.putExtra("title",droidYueItem.getTitle());
                 mContext.startActivity(intent);
             }
         });

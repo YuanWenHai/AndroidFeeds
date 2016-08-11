@@ -2,7 +2,6 @@ package com.will.androidfeeds.util;
 
 import com.jakewharton.disklrucache.DiskLruCache;
 import com.will.androidfeeds.base.MyApplication;
-import com.will.androidfeeds.common.Tools;
 
 import java.io.File;
 import java.io.IOException;

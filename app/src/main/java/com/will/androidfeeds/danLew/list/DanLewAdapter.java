@@ -34,6 +34,7 @@ public class DanLewAdapter extends CustomRecyclerAdapter<DanLewItem> {
                 }
                 Intent intent = new Intent(mContext, DanLewContentActivity.class);
                 intent.putExtra("url",danLewItem.getLink());
+                intent.putExtra("title",danLewItem.getTitle());
                 mContext.startActivity(intent);
             }
         });

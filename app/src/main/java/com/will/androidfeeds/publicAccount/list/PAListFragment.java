@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import com.github.ksoichiro.android.observablescrollview.ObservableGridView;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
 import com.github.ksoichiro.android.observablescrollview.ScrollState;
-import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.will.androidfeeds.R;
 import com.will.androidfeeds.base.BaseFragment;
 
@@ -23,16 +22,22 @@ import com.will.androidfeeds.base.BaseFragment;
 public class PAListFragment extends BaseFragment implements ObservableScrollViewCallbacks{
     Toolbar toolbar;
     ImageView imageView;
+    View statusBar;
+    int parallaxHeight;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.fragment_p_a_list,container,false);
+        View view = getInflaterWithTheme(inflater,R.style.PublicAccountTheme).inflate(R.layout.fragment_p_a_list,container,false);
         ObservableGridView gridView = (ObservableGridView) view.findViewById(R.id.list);
         imageView = (ImageView) view.findViewById(R.id.image);
         toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-        toolbar.setBackgroundColor(ScrollUtils.getColorWithAlpha(0, getResources().getColor(R.color.colorPrimary)));
-        int parallaxHeight = 720;
-        gridView.setScrollViewCallbacks(this);
+        toolbar.setTitle(getResources().getString(R.string.public_account));
+        setupToolbar(toolbar);
+
+
         View paddingView = new View(getActivity());
+        statusBar = view.findViewById(R.id.status_bar);
+        parallaxHeight = getResources().getDimensionPixelSize(R.dimen.public_account_parallax_height);
+        gridView.setScrollViewCallbacks(this);
         AbsListView.LayoutParams lp = new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT,
                 parallaxHeight);
         paddingView.setLayoutParams(lp);
@@ -54,10 +59,10 @@ public class PAListFragment extends BaseFragment implements ObservableScrollView
 
     @Override
     public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
-        int baseColor = getResources().getColor(R.color.wechat_green);
-        float alpha = Math.min(1, (float) scrollY / 720);
-        toolbar.setBackgroundColor(ScrollUtils.getColorWithAlpha(alpha, baseColor));
+        float alpha = Math.min(1, (float) scrollY / parallaxHeight);
+        toolbar.setAlpha(alpha);
         imageView.setTranslationY(-scrollY / 2);
+        statusBar.setAlpha(alpha);
     }
 
     @Override

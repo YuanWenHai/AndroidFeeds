@@ -30,6 +30,7 @@ public class PAContentListRecyclerAdapter extends CustomRecyclerAdapter<PAItem> 
                 Context mContext = getRecyclerView().getContext();
                 Intent intent = new Intent(mContext, PAContentActivity.class);
                 intent.putExtra("url",((PAItem) item).getLink());
+                intent.putExtra("title",((PAItem) item).getTitle());
                 mContext.startActivity(intent);
             }
         });

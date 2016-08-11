@@ -19,10 +19,11 @@ public class CsdnListFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.fragment_csdn_list,container,false);
+        View view = getInflaterWithTheme(inflater,R.style.CsdnTheme).inflate(R.layout.fragment_csdn_list,container,false);
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.csdn_toolbar);
-        toolbar.setTitle("CSDN Blog");
-
+        toolbar.setTitle(getResources().getString(R.string.csdn));
+        setupToolbar(toolbar);
+        toolbar.setAlpha(1);
         final TabLayout tabLayout = (TabLayout) view.findViewById(R.id.csdn_tab_layout);
 
         final ViewPager viewPager = (ViewPager) view.findViewById(R.id.csdn_viewpager);

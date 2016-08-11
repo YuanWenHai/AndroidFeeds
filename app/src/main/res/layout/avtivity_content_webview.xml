@@ -15,18 +15,11 @@
                     android:background="?attr/colorPrimary"
                     android:layout_height="?attr/actionBarSize"/>
 
-                <com.will.androidfeeds.view.MWebView
-                    android:id="@+id/content_marked_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
-                <ScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                        <TextView
-                            android:id="@+id/content_text"
+                        <com.will.androidfeeds.view.MWebView
+                            android:id="@+id/content_webview"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
-                </ScrollView>
+                            android:layout_height="match_parent"/>
+
         </LinearLayout>
         <View
             android:layout_width="match_parent"

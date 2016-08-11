@@ -63,6 +63,10 @@ public class MainActivity extends BaseActivity {
                     case R.id.navigation_dan_lew:
                         //switcher.switchFragment(Const.FRAGMENT_DANLEW);
                         selectedItem = Const.FRAGMENT_DANLEW;
+                        break;
+                    case R.id.navigation_favorite:
+                        selectedItem = Const.FRAGMENT_FAVORITE;
+                        break;
                 }
                 //hideContainer();
                 //showLoading();
@@ -99,7 +103,7 @@ public class MainActivity extends BaseActivity {
     }
     public void showLoading(){
         getFragmentManager().beginTransaction()
-                .setCustomAnimations(R.animator.animator_in,R.animator.animator_out)
+                .setCustomAnimations(R.animator.fragment_in,R.animator.fragment_out)
                 .add(R.id.fragment_loading_container,new LoadingFragment(),"loading")
                 .commit();
     }
@@ -109,6 +113,11 @@ public class MainActivity extends BaseActivity {
     public void closeDrawer(){
         if(drawerLayout.isDrawerOpen(Gravity.LEFT)){
             drawerLayout.closeDrawers();
+        }
+    }
+    public void openDrawer(){
+        if(!drawerLayout.isDrawerOpen(Gravity.LEFT)){
+            drawerLayout.openDrawer(Gravity.LEFT);
         }
     }
 }

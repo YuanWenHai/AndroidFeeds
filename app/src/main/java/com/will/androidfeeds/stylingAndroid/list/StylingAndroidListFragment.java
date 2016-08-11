@@ -36,7 +36,7 @@ public class StylingAndroidListFragment extends BaseFragment implements SwipeRef
         refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.styling_android_list_refresh_layout);
         refreshLayout.setProgressViewOffset(true,parallaxHeight-50,parallaxHeight+getRefreshLayoutDragOffset());
         refreshLayout.setOnRefreshListener(this);
-        refreshLayout.setColorSchemeColors(R.color.styling_android_color_dark);
+        refreshLayout.setColorSchemeColors(getResources().getColor(R.color.styling_android_color));
 
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.styling_android_list_recycler_view);

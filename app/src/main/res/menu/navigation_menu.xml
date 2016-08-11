@@ -25,5 +25,11 @@
             android:id="@+id/navigation_dan_lew"
             android:title="@string/dan_lew"/>
     </group>
+    <group android:id="@+id/favorite" android:checkableBehavior="single">
+        <item
+            android:title="@string/favorite"
+            android:id="@+id/navigation_favorite"/>
+    </group>
+
 
 </menu>

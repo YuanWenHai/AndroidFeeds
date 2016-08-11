@@ -33,6 +33,8 @@
             android:theme="@style/StylingAndroidTheme"/>
         <activity android:name=".danLew.content.DanLewContentActivity"
             android:theme="@style/DanLewTheme"/>
+        <activity android:name=".favorite.content.FavoriteContentActivity"
+            android:theme="@style/FavoriteTheme"/>
     </application>
 
 </manifest>

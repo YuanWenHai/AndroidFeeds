@@ -33,6 +33,7 @@ public class PagerFragment extends BaseFragment implements SwipeRefreshLayout.On
         View view = inflater.inflate(R.layout.fragment_csdn_viewpager_content,container,false);
         refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.csdn_list_refresh_layout);
         refreshLayout.setOnRefreshListener(this);
+        refreshLayout.setColorSchemeColors(getResources().getColor(R.color.csdn_red));
         recyclerView = (RecyclerView) view.findViewById(R.id.csdn_list_recycler_view);
         mAdapter = new CsdnListRecyclerAdapter(url);
 

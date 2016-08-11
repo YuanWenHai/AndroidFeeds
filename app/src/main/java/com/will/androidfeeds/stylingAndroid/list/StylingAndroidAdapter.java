@@ -31,6 +31,7 @@ public class StylingAndroidAdapter extends CustomRecyclerAdapter<StylingAndroidI
                 Context mContext = getRecyclerView().getContext();
                 Intent intent = new Intent(mContext, StylingAndroidContentActivity.class);
                 intent.putExtra("url",stylingAndroidItem.getLink());
+                intent.putExtra("title",stylingAndroidItem.getTitle());
                 mContext.startActivity(intent);
             }
         });
